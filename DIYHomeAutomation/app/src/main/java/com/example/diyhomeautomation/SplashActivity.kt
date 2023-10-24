@@ -38,7 +38,6 @@ class SplashActivity : AppCompatActivity() {
                 UtilPair.create(name, "name_tn"))
 
             startActivity(intent, options.toBundle())
-
         }, 1000)
     }
 }

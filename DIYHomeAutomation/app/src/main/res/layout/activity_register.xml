@@ -7,42 +7,54 @@
     android:orientation="vertical"
     android:background="@color/colorPrimary"
     android:padding="20dp"
-    tools:context=".LoginActivity">
+    tools:context=".RegisterActivity">
 
     <ImageView
-        android:id="@+id/login_logo_iv"
+        android:id="@+id/register_logo_iv"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:transitionName="logo_tn"
         app:srcCompat="@drawable/logo_original" />
 
     <TextView
-        android:id="@+id/login_welcome_tv"
+        android:id="@+id/register_welcome_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-10dp"
         android:fontFamily="@font/bungee"
         android:transitionName="name_tn"
-        android:text="Hello there, Welcome Back"
+        android:text="Welcome"
         android:textSize="35sp" />
 
     <TextView
-        android:id="@+id/login_desc_tv"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:transitionName="desc_tn"
-        android:text="Sign In to continue"
+        android:text="SignUp to start your new Journey"
         android:textSize="18sp"/>
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical">
+        android:layout_marginBottom="20dp">
+        
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/register_name_til"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/login_email_til"
+            android:id="@+id/register_email_til"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:transitionName="email_tn"
@@ -57,7 +69,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/login_password_til"
+            android:id="@+id/register_password_til"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:transitionName="password_tn"
@@ -72,21 +84,18 @@
 
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
-
+    
     <Button
-        android:id="@+id/login_login_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:transitionName="button_tn"
-        android:text="Login"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="5dp"/>
+        android:text="Register"/>
 
     <Button
-        android:id="@+id/login_register_btn"
+        android:id="@+id/register_login_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:transitionName="signin_signup_tn"
-        android:text="New User? SIGN UP"/>
+        android:text="Already have an account? LOGIN"/>
 
 </LinearLayout>
