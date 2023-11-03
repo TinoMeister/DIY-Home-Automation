@@ -89,6 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:transitionName="button_tn"
+        android:onClick="doRegister"
         android:text="Register"/>
 
     <Button
