@@ -10,7 +10,9 @@ import android.view.TextureView
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -18,19 +20,19 @@ import com.google.firebase.auth.auth
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    private val emailET: EditText by lazy {
+    private val register_emailET: TextInputLayout by lazy {
         findViewById(R.id.register_email_til)
     }
-    private val passwordET: EditText by lazy {
+    private val register_passwordET: TextInputLayout by lazy {
         findViewById(R.id.register_password_til)
     }
-    /*private val nameET: EditText by lazy {
-        findViewById(R.id.register_name_til)
-    }*/
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        val btn = findViewById<TextView>(R.id.register_register_btn)
+        btn.setOnClickListener { doRegister(btn) }
         auth = Firebase.auth
 
         val btnLogin = findViewById<Button>(R.id.register_login_btn)
@@ -39,10 +41,9 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    fun doRegister(v: View){
-        //val name = nameET.text.toString()
-        val email = emailET.text.toString()
-        val password = passwordET.text.toString()
+    fun doRegister(v: View) {
+        val email = register_emailET.editText!!.text.toString()
+        val password = register_passwordET.editText!!.text.toString()
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {

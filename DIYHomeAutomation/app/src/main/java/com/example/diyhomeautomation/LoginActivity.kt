@@ -21,16 +21,18 @@ import com.google.firebase.auth.auth
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    private val emailET: EditText by lazy {
+    private val emailET: TextInputLayout by lazy {
         findViewById(R.id.login_email_til)
     }
-    private val passwordET: EditText by lazy {
+    private val passwordET: TextInputLayout by lazy {
         findViewById(R.id.login_password_til)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        val btn = findViewById<TextView>(R.id.login_login_btn)
+        btn.setOnClickListener { doLogin(btn) }
         auth = Firebase.auth
 
         val bounds = ChangeBounds().setDuration(1000)
@@ -42,7 +44,6 @@ class LoginActivity : AppCompatActivity() {
         val desc = findViewById<TextView>(R.id.login_desc_tv)
         val email = findViewById<TextInputLayout>(R.id.login_email_til)
         val password = findViewById<TextInputLayout>(R.id.login_password_til)
-        val btn = findViewById<TextView>(R.id.login_login_btn)
 
         val btnSignUp = findViewById<Button>(R.id.login_register_btn)
         btnSignUp.setOnClickListener {
@@ -67,9 +68,9 @@ class LoginActivity : AppCompatActivity() {
         super.onBackPressed()
     }
 
-    fun doLogin(v: View){
-        val email = emailET.text.toString()
-        val password = passwordET.text.toString()
+    fun doLogin(v: View) {
+        val email = emailET.editText!!.text.toString()
+        val password = passwordET.editText!!.text.toString()
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {

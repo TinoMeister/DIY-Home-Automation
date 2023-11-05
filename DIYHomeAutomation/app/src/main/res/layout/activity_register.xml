@@ -86,11 +86,13 @@
     </LinearLayout>
     
     <Button
+        android:id="@+id/register_register_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:transitionName="button_tn"
+        android:text="Register"
         android:onClick="doRegister"
-        android:text="Register"/>
+        />
 
     <Button
         android:id="@+id/register_login_btn"
