@@ -21,10 +21,10 @@ import com.google.firebase.auth.auth
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    private val emailET: TextInputLayout by lazy {
+    val email: TextInputLayout by lazy {
         findViewById(R.id.login_email_til)
     }
-    private val passwordET: TextInputLayout by lazy {
+    val password: TextInputLayout by lazy {
         findViewById(R.id.login_password_til)
     }
 
@@ -42,8 +42,6 @@ class LoginActivity : AppCompatActivity() {
         val logo = findViewById<ImageView>(R.id.login_logo_iv)
         val name = findViewById<TextView>(R.id.login_welcome_tv)
         val desc = findViewById<TextView>(R.id.login_desc_tv)
-        val email = findViewById<TextInputLayout>(R.id.login_email_til)
-        val password = findViewById<TextInputLayout>(R.id.login_password_til)
 
         val btnSignUp = findViewById<Button>(R.id.login_register_btn)
         btnSignUp.setOnClickListener {
@@ -69,8 +67,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun doLogin(v: View) {
-        val email = emailET.editText!!.text.toString()
-        val password = passwordET.editText!!.text.toString()
+        val email = email.editText!!.text.toString()
+        val password = password.editText!!.text.toString()
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {

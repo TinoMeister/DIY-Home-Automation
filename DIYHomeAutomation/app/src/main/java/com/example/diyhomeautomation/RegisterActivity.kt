@@ -20,10 +20,10 @@ import com.google.firebase.auth.auth
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    private val register_emailET: TextInputLayout by lazy {
+    val reg_email: TextInputLayout by lazy {
         findViewById(R.id.register_email_til)
     }
-    private val register_passwordET: TextInputLayout by lazy {
+    val reg_password: TextInputLayout by lazy {
         findViewById(R.id.register_password_til)
     }
 
@@ -42,8 +42,8 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun doRegister(v: View) {
-        val email = register_emailET.editText!!.text.toString()
-        val password = register_passwordET.editText!!.text.toString()
+        val email = reg_email.editText!!.text.toString()
+        val password = reg_password.editText!!.text.toString()
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
