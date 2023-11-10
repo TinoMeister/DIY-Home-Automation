@@ -1,14 +1,18 @@
-package com.example.diyhomeautomation.home
+package com.example.diyhomeautomation.homes
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Button
 import android.widget.GridView
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import com.example.diyhomeautomation.R
 import com.example.diyhomeautomation.customs.CustomHomeDevicesGridView
 import com.example.diyhomeautomation.customs.CustomHomeRoomsGridView
@@ -45,11 +49,22 @@ class HomeFragment : Fragment() {
         this.activity?.findViewById<TextView>(R.id.main_mainText_tv)?.text = "Hello there"
         this.activity?.findViewById<TextView>(R.id.main_subtext_tv)?.text = "Welcome to your smart home"
 
+        this.activity?.findViewById<ImageButton>(R.id.main_add_btn)?.setOnClickListener {
+            val intent = Intent(this.activity, RoomCUActivity::class.java)
+            startActivity(intent)
+        }
+
         val action1 = this.activity?.findViewById<Button>(R.id.main_action1_btn)
         action1?.text = "All Room"
         action1?.setOnClickListener {
             val adapter = CustomHomeRoomsGridView(myView.context, R.layout.custom_home_rooms_cardview, testValues.toMutableList())
             lst.adapter = adapter
+
+            lst.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
+                //val str = (adapterView.adapter as CustomHomeRoomsGridView).getItem(position)
+                val intent = Intent(this.activity, RoomActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         val action2 = this.activity?.findViewById<Button>(R.id.main_action2_btn)
@@ -70,6 +85,12 @@ class HomeFragment : Fragment() {
         lst = myView.findViewById<GridView>(R.id.home_fr_gv)
         val adapter = CustomHomeRoomsGridView(myView.context, R.layout.custom_home_rooms_cardview, testValues.toMutableList())
         lst.adapter = adapter
+
+        lst.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
+            //val str = (adapterView.adapter as CustomHomeRoomsGridView).getItem(position)
+            val intent = Intent(this.activity, RoomActivity::class.java)
+            startActivity(intent)
+        }
 
         // Inflate the layout for this fragment
         return myView

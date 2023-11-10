@@ -3,10 +3,10 @@ package com.example.diyhomeautomation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.diyhomeautomation.home.HomeFragment
-import com.example.diyhomeautomation.home.RestrictionFragment
-import com.example.diyhomeautomation.home.ScheduleFragment
-import com.example.diyhomeautomation.home.SettingFragment
+import com.example.diyhomeautomation.homes.HomeFragment
+import com.example.diyhomeautomation.restrictions.RestrictionFragment
+import com.example.diyhomeautomation.schedules.ScheduleFragment
+import com.example.diyhomeautomation.settings.SettingFragment
 import com.example.diyhomeautomation.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

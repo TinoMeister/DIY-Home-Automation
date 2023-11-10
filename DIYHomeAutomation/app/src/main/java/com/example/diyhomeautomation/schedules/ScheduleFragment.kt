@@ -1,7 +1,6 @@
-package com.example.diyhomeautomation.home
+package com.example.diyhomeautomation.schedules
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +8,8 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.example.diyhomeautomation.R
-import com.example.diyhomeautomation.customs.CustomRestrictionListView
 import com.example.diyhomeautomation.customs.CustomScheduleListView
 
 // TODO: Rename parameter arguments, choose names that match
@@ -20,10 +19,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [RestrictionFragment.newInstance] factory method to
+ * Use the [ScheduleFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class RestrictionFragment : Fragment() {
+class ScheduleFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -42,20 +41,28 @@ class RestrictionFragment : Fragment() {
         }
 
         this.activity?.findViewById<LinearLayout>(R.id.main_ln)?.visibility = View.VISIBLE
-        this.activity?.findViewById<TextView>(R.id.main_mainText_tv)?.text = "Restrictions"
-        this.activity?.findViewById<TextView>(R.id.main_subtext_tv)?.text = "Create your Restrictions"
+        this.activity?.findViewById<TextView>(R.id.main_mainText_tv)?.text = "Schedule"
+        this.activity?.findViewById<TextView>(R.id.main_subtext_tv)?.text = "Create your routine schedule"
 
         val action1 = this.activity?.findViewById<Button>(R.id.main_action1_btn)
-        action1?.text = "All"
+        action1?.text = "All day"
         action1?.setOnClickListener {
-            val adapter = CustomRestrictionListView(myView.context, R.layout.custom_restriction_cardview, testValues.toMutableList())
+            val adapter = CustomScheduleListView(
+                myView.context,
+                R.layout.custom_schedule_cardview,
+                testValues.toMutableList()
+            )
             lst.adapter = adapter
         }
 
         val action2 = this.activity?.findViewById<Button>(R.id.main_action2_btn)
-        action2?.text = "Active"
+        action2?.text = "Today"
         action2?.setOnClickListener {
-            val adapter = CustomRestrictionListView(myView.context, R.layout.custom_restriction_cardview, testValues.toMutableList())
+            val adapter = CustomScheduleListView(
+                myView.context,
+                R.layout.custom_schedule_cardview,
+                testValues.toMutableList()
+            )
             lst.adapter = adapter
         }
     }
@@ -64,10 +71,14 @@ class RestrictionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        myView = inflater.inflate(R.layout.fragment_restriction, container, false)
+        myView = inflater.inflate(R.layout.fragment_schedule, container, false)
 
-        lst = myView.findViewById<ListView>(R.id.restriction_fr_lst)
-        val adapter = CustomRestrictionListView(myView.context, R.layout.custom_restriction_cardview, testValues.toMutableList())
+        lst = myView.findViewById<ListView>(R.id.schedule_fr_lst)
+        val adapter = CustomScheduleListView(
+            myView.context,
+            R.layout.custom_schedule_cardview,
+            testValues.toMutableList()
+        )
         lst.adapter = adapter
 
         // Inflate the layout for this fragment
@@ -81,12 +92,12 @@ class RestrictionFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment RestrictionFragment.
+         * @return A new instance of fragment ScheduleFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            RestrictionFragment().apply {
+            ScheduleFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
