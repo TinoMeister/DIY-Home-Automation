@@ -13,6 +13,12 @@
         android:theme="@style/Theme.DIYHomeAutomation"
         tools:targetApi="31">
         <activity
+            android:name=".homes.DeviceAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".homes.DeviceActivity"
+            android:exported="false" />
+        <activity
             android:name=".homes.RoomCUActivity"
             android:exported="false" />
         <activity

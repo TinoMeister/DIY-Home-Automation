@@ -23,7 +23,7 @@
         android:layout_marginTop="-10dp"
         android:fontFamily="@font/bungee"
         android:transitionName="name_tn"
-        android:text="Hello there, Welcome Back"
+        android:text="@string/hello_there_welcome_back"
         android:textSize="35sp" />
 
     <TextView
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:transitionName="desc_tn"
-        android:text="Sign In to continue"
+        android:text="@string/sign_in_to_continue"
         android:textSize="18sp"/>
     
     <LinearLayout
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:transitionName="email_tn"
-            android:hint="Email"
+            android:hint="@string/email"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:transitionName="password_tn"
-            android:hint="Password"
+            android:hint="@string/password"
             app:passwordToggleEnabled="true"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -78,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:transitionName="button_tn"
-        android:text="Login"
+        android:text="@string/login"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="5dp"/>
 
@@ -87,6 +87,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:transitionName="signin_signup_tn"
-        android:text="New User? SIGN UP"/>
+        android:text="@string/new_user_sign_up"/>
 
 </LinearLayout>

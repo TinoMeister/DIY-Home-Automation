@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.Switch
 import android.widget.TextView
 import com.example.diyhomeautomation.R
 
-class CustomHomeRoomsGridView(context: Context, resource: Int, objects: MutableList<String>) :
+class CustomHomeDevicesAdapter(context: Context, resource: Int, objects: MutableList<String>) :
     ArrayAdapter<String>(context, resource, objects) {
 
     private var mContext: Context
@@ -38,6 +39,7 @@ class CustomHomeRoomsGridView(context: Context, resource: Int, objects: MutableL
         val value = mValues[position]
 
         vh.title?.text = value
+        vh.isActive?.isChecked = position % 2 == 1
         //vh.body?.text = value.body
 
         return view
@@ -45,8 +47,8 @@ class CustomHomeRoomsGridView(context: Context, resource: Int, objects: MutableL
 
 
     private class MyViewHolder(view: View?) {
-        val img = view?.findViewById<ImageView>(R.id.cardHomeRoom_img)
-        val title = view?.findViewById<TextView>(R.id.cardHomeRoom_title_tv)
-        val total = view?.findViewById<TextView>(R.id.cardHomeRoom_total_tv)
+        val img = view?.findViewById<ImageView>(R.id.cardHomeDev_img)
+        val title = view?.findViewById<TextView>(R.id.cardHomeDev_title_tv)
+        val isActive = view?.findViewById<Switch>(R.id.cardHomeDev_active_sw)
     }
 }

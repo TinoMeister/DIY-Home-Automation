@@ -10,7 +10,7 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.diyhomeautomation.R
-import com.example.diyhomeautomation.customs.CustomRestrictionListView
+import com.example.diyhomeautomation.customs.CustomRestrictionAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,7 +47,7 @@ class RestrictionFragment : Fragment() {
         val action1 = this.activity?.findViewById<Button>(R.id.main_action1_btn)
         action1?.text = "All"
         action1?.setOnClickListener {
-            val adapter = CustomRestrictionListView(
+            val adapter = CustomRestrictionAdapter(
                 myView.context,
                 R.layout.custom_restriction_cardview,
                 testValues.toMutableList()
@@ -58,7 +58,7 @@ class RestrictionFragment : Fragment() {
         val action2 = this.activity?.findViewById<Button>(R.id.main_action2_btn)
         action2?.text = "Active"
         action2?.setOnClickListener {
-            val adapter = CustomRestrictionListView(
+            val adapter = CustomRestrictionAdapter(
                 myView.context,
                 R.layout.custom_restriction_cardview,
                 testValues.toMutableList()
@@ -74,7 +74,7 @@ class RestrictionFragment : Fragment() {
         myView = inflater.inflate(R.layout.fragment_restriction, container, false)
 
         lst = myView.findViewById<ListView>(R.id.restriction_fr_lst)
-        val adapter = CustomRestrictionListView(
+        val adapter = CustomRestrictionAdapter(
             myView.context,
             R.layout.custom_restriction_cardview,
             testValues.toMutableList()

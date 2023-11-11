@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DIY Home Automation</string>
+    <string name="company_description">" Sua casa ao seu alcance"</string>
+    <string name="home_fg_mainText">" Olá"</string>
+    <string name="home_fg_subText">" Bem-vindo à sua casa inteligente"</string>
+    <string name="deviceAdd_select_name">Selecione o nome da sala</string>
+    <string name="name">Nome</string>
+    <string name="deviceAdd_device_name">Insira o nome do dispositivo</string>
+    <string name="select_icon">Selecione o Icon</string>
+    <string name="hello_there_welcome_back">Olá, bem-vindo de volta</string>
+    <string name="sign_in_to_continue">Faça login para continuar</string>
+    <string name="new_user_sign_up">Novo utilizador? REGISTE-SE</string>
+    <string name="welcome">Bem-vindo</string>
+    <string name="signup_to_start_your_new_journey">Registe-se para iniciar sua nova jornada</string>
+    <string name="register">Registro</string>
+    <string name="already_have_an_account_login">" Já tem uma conta? Faça o Login"</string>
+    <string name="add">Adicionar</string>
+    <string name="edit">Editar</string>
+    <string name="save">Guardar</string>
+    <string name="delete">Apagar</string>
+    <string name="all_room">Divisões</string>
+    <string name="active_device">Dispositivos Ativos</string>
+    <string name="schedule">Agendar</string>
+    <string name="restrictions">Restrições</string>
+    <string name="settings">Definições</string>
+    <string name="enter_room_name">Insira o nome da divisão</string>
+</resources>

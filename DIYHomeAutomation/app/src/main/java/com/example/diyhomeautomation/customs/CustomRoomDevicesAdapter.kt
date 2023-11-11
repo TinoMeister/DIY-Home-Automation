@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.diyhomeautomation.R
 
 
-class CustomRoomDevicesRecyclerView(private val objects: MutableList<String>) :
-    RecyclerView.Adapter<CustomRoomDevicesRecyclerView.MyViewHolder>() {
+class CustomRoomDevicesAdapter(private val objects: MutableList<String>) :
+    RecyclerView.Adapter<CustomRoomDevicesAdapter.MyViewHolder>() {
 
     var onItemClick : ((String) -> Unit)? = null
 

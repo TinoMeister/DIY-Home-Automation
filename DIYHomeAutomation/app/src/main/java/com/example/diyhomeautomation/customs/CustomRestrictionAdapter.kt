@@ -1,17 +1,15 @@
 package com.example.diyhomeautomation.customs
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import com.example.diyhomeautomation.R
 
-class CustomHomeDevicesGridView(context: Context, resource: Int, objects: MutableList<String>) :
+class CustomRestrictionAdapter(context: Context, resource: Int, objects: MutableList<String>) :
     ArrayAdapter<String>(context, resource, objects) {
 
     private var mContext: Context
@@ -48,8 +46,8 @@ class CustomHomeDevicesGridView(context: Context, resource: Int, objects: Mutabl
 
 
     private class MyViewHolder(view: View?) {
-        val img = view?.findViewById<ImageView>(R.id.cardHomeDev_img)
-        val title = view?.findViewById<TextView>(R.id.cardHomeDev_title_tv)
-        val isActive = view?.findViewById<Switch>(R.id.cardHomeDev_active_sw)
+        val title = view?.findViewById<TextView>(R.id.cardRestriction_title_tv)
+        val total = view?.findViewById<TextView>(R.id.cardRestriction_total_tv)
+        val isActive = view?.findViewById<Switch>(R.id.cardRestriction_active_sw)
     }
 }

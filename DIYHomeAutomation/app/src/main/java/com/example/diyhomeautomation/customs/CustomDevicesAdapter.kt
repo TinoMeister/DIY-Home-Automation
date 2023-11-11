@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import com.example.diyhomeautomation.R
 
-class CustomScheduleListView(context: Context, resource: Int, objects: MutableList<String>) :
+class CustomDevicesAdapter(context: Context, resource: Int, objects: MutableList<String>) :
     ArrayAdapter<String>(context, resource, objects) {
 
     private var mContext: Context
@@ -38,7 +40,6 @@ class CustomScheduleListView(context: Context, resource: Int, objects: MutableLi
         val value = mValues[position]
 
         vh.title?.text = value
-        vh.isActive?.isChecked = position % 2 == 1
         //vh.body?.text = value.body
 
         return view
@@ -46,10 +47,9 @@ class CustomScheduleListView(context: Context, resource: Int, objects: MutableLi
 
 
     private class MyViewHolder(view: View?) {
-        val title = view?.findViewById<TextView>(R.id.cardSchedule_title_tv)
-        val time = view?.findViewById<TextView>(R.id.cardSchedule_time_tv)
-        val day = view?.findViewById<TextView>(R.id.cardSchedule_day_tv)
-        val total = view?.findViewById<TextView>(R.id.cardSchedule_total_tv)
-        val isActive = view?.findViewById<Switch>(R.id.cardSchedule_active_sw)
+        val img = view?.findViewById<ImageView>(R.id.cardDev_img)
+        val title = view?.findViewById<TextView>(R.id.cardDev_title_tv)
+        val editBtn = view?.findViewById<Button>(R.id.cardDev_edit_btn)
+        val deleteBtn = view?.findViewById<Button>(R.id.cardDev_delete_btn)
     }
 }

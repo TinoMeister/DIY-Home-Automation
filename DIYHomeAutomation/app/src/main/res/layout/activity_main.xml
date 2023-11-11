@@ -11,6 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toTopOf="@+id/main_fl"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,40 +19,61 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="30dp">
             <TextView
                 android:id="@+id/main_mainText_tv"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"/>
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:textSize="18sp"/>
 
             <ImageButton
                 android:id="@+id/main_add_btn"
+                android:contentDescription="@string/btn_add_desc"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_add_circle_outline_24"/>
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:background="@null"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_add"/>
+
+            <ImageButton
+                android:id="@+id/main_notifications_btn"
+                android:contentDescription="@string/btn_notifications_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_notifications"/>
 
         </LinearLayout>
 
         <TextView
             android:id="@+id/main_subtext_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
 
             <Button
                 android:id="@+id/main_action1_btn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:textSize="15sp"/>
 
             <Button
                 android:id="@+id/main_action2_btn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:textSize="15sp"/>
         </LinearLayout>
 
 
@@ -64,9 +86,7 @@
         app:layout_constraintTop_toBottomOf="@+id/main_ln"
         app:layout_constraintBottom_toTopOf="@+id/main_nav_bnv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </FrameLayout>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_nav_bnv"

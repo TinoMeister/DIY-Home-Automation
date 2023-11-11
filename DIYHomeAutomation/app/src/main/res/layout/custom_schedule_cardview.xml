@@ -63,7 +63,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginRight="5dp"
-                        android:src="@drawable/baseline_home_24"/>
+                        android:src="@drawable/ic_home"/>
 
                     <TextView
                         android:id="@+id/cardSchedule_time_tv"
@@ -84,7 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginRight="5dp"
-                        android:src="@drawable/baseline_home_24"/>
+                        android:src="@drawable/ic_home"/>
 
                     <TextView
                         android:id="@+id/cardSchedule_day_tv"
