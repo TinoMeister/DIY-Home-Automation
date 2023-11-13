@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.diyhomeautomation.models.User
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -20,6 +21,9 @@ import com.google.firebase.auth.auth
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    val reg_name: TextInputLayout by lazy {
+        findViewById(R.id.register_name_til)
+    }
     val reg_email: TextInputLayout by lazy {
         findViewById(R.id.register_email_til)
     }
@@ -42,12 +46,16 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun doRegister(v: View) {
+        val name= reg_name.editText!!.text.toString()
         val email = reg_email.editText!!.text.toString()
         val password = reg_password.editText!!.text.toString()
+
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
+                    val newUser = User(name, email)
+                    //User.addUser(newUser)
                     Toast.makeText(
                         baseContext,
                         "Register success",
