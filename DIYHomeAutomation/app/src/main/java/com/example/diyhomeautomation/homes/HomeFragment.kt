@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.diyhomeautomation.R
+import com.example.diyhomeautomation.customs.CustomHomeDevicesAdapter
 import com.example.diyhomeautomation.customs.CustomHomeRoomsAdapter
 
 class HomeFragment : Fragment() {
@@ -61,6 +62,8 @@ class HomeFragment : Fragment() {
             val intent = Intent(this.activity, RoomCUActivity::class.java)
             startActivity(intent)
         }
+
+        notificationBtn.visibility = View.VISIBLE
         notificationBtn.setOnClickListener {
         }
 
@@ -89,7 +92,11 @@ class HomeFragment : Fragment() {
 
 
     private fun updateListView(layout: Int) {
-        val adapter = CustomHomeRoomsAdapter(myView.context, layout, testValues.toMutableList())
+        val adapter = if (layout == R.layout.custom_home_rooms_cardview)
+            CustomHomeRoomsAdapter(myView.context, layout, testValues.toMutableList())
+        else
+            CustomHomeDevicesAdapter(myView.context, layout, testValues.toMutableList())
+
         lst.adapter = adapter
 
         if (layout != R.layout.custom_home_rooms_cardview) return

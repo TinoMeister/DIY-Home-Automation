@@ -38,4 +38,8 @@
     <string name="restrictions">Restrictions</string>
     <string name="settings">Settings</string>
     <string name="enter_room_name">Enter room name</string>
+    <string name="create_your_restrictions">Create your Restrictions</string>
+    <string name="create_your_routine_schedule">Create your routine schedule</string>
+    <string name="all_day">All day</string>
+    <string name="today">Today</string>
 </resources>

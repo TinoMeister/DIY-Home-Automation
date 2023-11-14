@@ -7,6 +7,11 @@
         <item name="android:windowContentTransitions">true</item>
     </style>
 
+    <style name="Button.White" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorAccent">@android:color/white</item>
+        <item name="backgroundColor">@color/black</item>
+    </style>
+
     <style name="Theme.AppCompat.DayNight.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>

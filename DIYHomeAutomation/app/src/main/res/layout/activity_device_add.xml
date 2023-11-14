@@ -74,9 +74,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:weightSum="4"
-                android:layout_marginBottom="5dp">
+                android:layout_height="70dp"
+                android:weightSum="4">
 
                 <ImageButton
                     android:contentDescription="@string/btn_chair_desc"
@@ -86,7 +85,7 @@
                     android:layout_margin="5dp"
                     android:background="@drawable/selectable_button_bg"
                     android:elevation="5dp"
-                    android:padding="10dp"
+                    android:padding="12dp"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:src="@drawable/ic_chair" />
@@ -99,7 +98,7 @@
                     android:layout_margin="5dp"
                     android:background="@drawable/selectable_button_bg"
                     android:elevation="5dp"
-                    android:padding="10dp"
+                    android:padding="12dp"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:src="@drawable/ic_bathtub"/>
@@ -112,7 +111,7 @@
                     android:layout_margin="5dp"
                     android:background="@drawable/selectable_button_bg"
                     android:elevation="5dp"
-                    android:padding="10dp"
+                    android:padding="12dp"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:src="@drawable/ic_bed"/>
@@ -125,7 +124,7 @@
                     android:layout_margin="5dp"
                     android:background="@drawable/selectable_button_bg"
                     android:elevation="5dp"
-                    android:padding="10dp"
+                    android:padding="12dp"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:src="@drawable/ic_tv"/>
@@ -134,9 +133,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:weightSum="4"
-                android:layout_marginTop="5dp">
+                android:layout_height="70dp"
+                android:weightSum="4">
 
                 <ImageButton
                     android:contentDescription="@string/btn_kitchen_desc"
@@ -146,7 +144,7 @@
                     android:layout_margin="5dp"
                     android:background="@drawable/selectable_button_bg"
                     android:elevation="10dp"
-                    android:padding="10dp"
+                    android:padding="12dp"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:src="@drawable/ic_kitchen"/>
@@ -159,7 +157,7 @@
                     android:layout_margin="5dp"
                     android:background="@drawable/selectable_button_bg"
                     android:elevation="10dp"
-                    android:padding="10dp"
+                    android:padding="12dp"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:src="@drawable/ic_garage"/>
@@ -172,7 +170,7 @@
                     android:layout_margin="5dp"
                     android:background="@drawable/selectable_button_bg"
                     android:elevation="10dp"
-                    android:padding="10dp"
+                    android:padding="12dp"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:src="@drawable/ic_other_house"/>

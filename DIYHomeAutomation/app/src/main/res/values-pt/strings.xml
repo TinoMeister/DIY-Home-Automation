@@ -25,4 +25,8 @@
     <string name="restrictions">Restrições</string>
     <string name="settings">Definições</string>
     <string name="enter_room_name">Insira o nome da divisão</string>
+    <string name="create_your_restrictions">Crie as suas Restrições</string>
+    <string name="create_your_routine_schedule">Crie a suas rotinas</string>
+    <string name="all_day">Todos dias</string>
+    <string name="today">Hoje</string>
 </resources>

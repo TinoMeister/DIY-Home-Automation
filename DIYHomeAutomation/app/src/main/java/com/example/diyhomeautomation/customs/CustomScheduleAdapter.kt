@@ -1,5 +1,6 @@
 package com.example.diyhomeautomation.customs
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,8 @@ class CustomScheduleAdapter(context: Context, resource: Int, objects: MutableLis
     private var mContext: Context
     private var mValues: MutableList<String>
     private var mResource: Int
+
+    var onItemClick : ((String) -> Unit)? = null
 
     init {
         mContext = context
@@ -41,6 +44,10 @@ class CustomScheduleAdapter(context: Context, resource: Int, objects: MutableLis
         vh.isActive?.isChecked = position % 2 == 1
         //vh.body?.text = value.body
 
+        view.setOnClickListener {
+            onItemClick?.invoke(value)
+        }
+
         return view
     }
 
@@ -50,6 +57,7 @@ class CustomScheduleAdapter(context: Context, resource: Int, objects: MutableLis
         val time = view?.findViewById<TextView>(R.id.cardSchedule_time_tv)
         val day = view?.findViewById<TextView>(R.id.cardSchedule_day_tv)
         val total = view?.findViewById<TextView>(R.id.cardSchedule_total_tv)
+        @SuppressLint("UseSwitchCompatOrMaterialCode")
         val isActive = view?.findViewById<Switch>(R.id.cardSchedule_active_sw)
     }
 }

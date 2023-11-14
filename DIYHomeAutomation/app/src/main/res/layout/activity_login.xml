@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorPrimary"
     android:padding="20dp"
     tools:context=".LoginActivity">
 
@@ -24,7 +23,7 @@
         android:fontFamily="@font/bungee"
         android:transitionName="name_tn"
         android:text="@string/hello_there_welcome_back"
-        android:textSize="35sp" />
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/login_desc_tv"
@@ -37,7 +36,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:orientation="vertical">
 
@@ -76,7 +75,7 @@
     <Button
         android:id="@+id/login_login_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:transitionName="button_tn"
         android:text="@string/login"
         android:layout_marginTop="15dp"
@@ -85,7 +84,7 @@
     <Button
         android:id="@+id/login_register_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:transitionName="signin_signup_tn"
         android:text="@string/new_user_sign_up"/>
 

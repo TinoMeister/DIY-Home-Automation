@@ -6,16 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context=".homes.RoomCUActivity">
+    tools:context=".schedules.ScheduleCUActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/enter_room_name"
-        android:layout_marginBottom="10dp"
+        android:text="Enter Schedule Title"
         android:textSize="15sp"/>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/schedule_cu_name_til"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/name"
@@ -29,16 +29,86 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginEnd="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start time"
+                android:layout_marginBottom="10dp"
+                android:textSize="15sp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Start time"
+                android:layout_marginBottom="10dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="time" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="End Time"
+                android:layout_marginBottom="10dp"
+                android:textSize="15sp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="End Time"
+                android:layout_marginBottom="10dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="time" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/select_icon"
-        android:layout_marginBottom="10dp"
-        android:textSize="15sp"/>
+        android:text="Select day"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="15dp"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="145dp"
         android:layout_margin="5dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="5dp">
@@ -52,105 +122,72 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
+                android:layout_weight="1"
                 android:weightSum="4">
 
-                <ImageButton
-                    android:contentDescription="@string/btn_chair_desc"
+                <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_margin="5dp"
-                    android:background="@drawable/selectable_button_bg"
                     android:elevation="5dp"
-                    android:padding="12dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/ic_chair" />
+                    android:text="Mon" />
 
-                <ImageButton
-                    android:contentDescription="@string/btn_bath_desc"
+                <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_margin="5dp"
-                    android:background="@drawable/selectable_button_bg"
                     android:elevation="5dp"
-                    android:padding="12dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/ic_bathtub"/>
+                    android:text="Tue"/>
 
-                <ImageButton
-                    android:contentDescription="@string/btn_bed_desc"
+                <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_margin="5dp"
-                    android:background="@drawable/selectable_button_bg"
                     android:elevation="5dp"
-                    android:padding="12dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/ic_bed"/>
+                    android:text="Wed"/>
 
-                <ImageButton
-                    android:contentDescription="@string/btn_tv_desc"
+                <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_margin="5dp"
-                    android:background="@drawable/selectable_button_bg"
                     android:elevation="5dp"
-                    android:padding="12dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/ic_tv"/>
+                    android:text="Thu"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
+                android:layout_weight="1"
                 android:weightSum="4">
 
-                <ImageButton
-                    android:contentDescription="@string/btn_kitchen_desc"
+                <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.5"
                     android:layout_margin="5dp"
-                    android:background="@drawable/selectable_button_bg"
-                    android:elevation="10dp"
-                    android:padding="12dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/ic_kitchen"/>
+                    android:elevation="5dp"
+                    android:text="Fri"/>
 
-                <ImageButton
-                    android:contentDescription="@string/btn_garage_desc"
+                <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.5"
                     android:layout_margin="5dp"
-                    android:background="@drawable/selectable_button_bg"
-                    android:elevation="10dp"
-                    android:padding="12dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/ic_garage"/>
+                    android:elevation="5dp"
+                    android:text="Sat"/>
 
-                <ImageButton
-                    android:contentDescription="@string/btn_other_desc"
+                <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.5"
                     android:layout_margin="5dp"
-                    android:background="@drawable/selectable_button_bg"
-                    android:elevation="10dp"
-                    android:padding="12dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/ic_other_house"/>
+                    android:elevation="5dp"
+                    android:text="Sun"/>
 
             </LinearLayout>
 
@@ -161,7 +198,6 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/save"/>
+        android:text="Next" />
 
 </LinearLayout>
