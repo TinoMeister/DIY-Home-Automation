@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorPrimary"
     android:padding="20dp"
     tools:context=".RegisterActivity">
 
@@ -18,33 +17,33 @@
 
     <TextView
         android:id="@+id/register_welcome_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:fontFamily="@font/bungee"
         android:transitionName="name_tn"
-        android:text="Welcome"
-        android:textSize="35sp" />
+        android:text="@string/welcome"
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:transitionName="desc_tn"
-        android:text="SignUp to start your new Journey"
+        android:text="@string/signup_to_start_your_new_journey"
         android:textSize="18sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp">
         
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/register_name_til"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
+            android:hint="@string/name"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -58,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:transitionName="email_tn"
-            android:hint="Email"
+            android:hint="@string/email"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -73,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:transitionName="password_tn"
-            android:hint="Password"
+            android:hint="@string/password"
             app:passwordToggleEnabled="true"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -88,17 +87,15 @@
     <Button
         android:id="@+id/register_register_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:transitionName="button_tn"
-        android:text="Register"
-        android:onClick="doRegister"
-        />
+        android:text="@string/register"/>
 
     <Button
         android:id="@+id/register_login_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:transitionName="signin_signup_tn"
-        android:text="Already have an account? LOGIN"/>
+        android:text="@string/already_have_an_account_login"/>
 
 </LinearLayout>

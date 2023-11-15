@@ -5,10 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.transition.ChangeBounds
 import android.util.Pair
-import android.util.Patterns
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -31,17 +29,15 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        val btn = findViewById<TextView>(R.id.login_login_btn)
-        btn.setOnClickListener { doLogin(btn) }
         auth = Firebase.auth
 
         val bounds = ChangeBounds().setDuration(1000)
         window.sharedElementEnterTransition = bounds
 
-
         val logo = findViewById<ImageView>(R.id.login_logo_iv)
         val name = findViewById<TextView>(R.id.login_welcome_tv)
         val desc = findViewById<TextView>(R.id.login_desc_tv)
+        val btnLogin = findViewById<TextView>(R.id.login_login_btn)
 
         val btnSignUp = findViewById<Button>(R.id.login_register_btn)
         btnSignUp.setOnClickListener {
@@ -53,10 +49,15 @@ class LoginActivity : AppCompatActivity() {
                 Pair.create(desc, "desc_tn"),
                 Pair.create(email, "email_tn"),
                 Pair.create(password, "password_tn"),
-                Pair.create(btn, "button_tn"),
+                Pair.create(btnLogin, "button_tn"),
                 Pair.create(btnSignUp, "signin_signup_tn"))
 
             startActivity(intent, options.toBundle())
+        }
+
+        btnLogin.setOnClickListener {
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 

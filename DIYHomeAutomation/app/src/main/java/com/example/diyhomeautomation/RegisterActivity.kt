@@ -54,7 +54,7 @@ class RegisterActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
-                    val newUser = User(name, email)
+                    //val newUser = User(name, email)
                     //User.addUser(newUser)
                     Toast.makeText(
                         baseContext,

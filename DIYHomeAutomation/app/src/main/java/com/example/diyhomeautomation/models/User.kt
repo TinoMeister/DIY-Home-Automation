@@ -20,18 +20,6 @@ class User(name: String, email: String, pass: String){
         User("Tiago", "tiago@gmail.com","random2"),
         User("Luis", "luis@gmail.com", "random3")
     )
-
-    fun verifyRegister(name: String, email: String){
-        auth = Firebase.auth
-        auth.createUserWithEmailAndPassword(email, pass)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    TODO()
-                } else {
-                    TODO()
-                }
-            }
-    }
 }
 
 
