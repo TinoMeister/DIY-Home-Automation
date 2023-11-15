@@ -85,6 +85,7 @@
     </LinearLayout>
     
     <Button
+        android:id="@+id/register_register_btn"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:transitionName="button_tn"
