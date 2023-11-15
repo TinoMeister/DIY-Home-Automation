@@ -1,26 +1,12 @@
 package com.example.diyhomeautomation
 
-import android.app.ActivityOptions
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Pair
-import android.util.Patterns
-import android.view.TextureView
-import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
-import com.example.diyhomeautomation.models.User
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 
 class RegisterActivity : AppCompatActivity() {
-
-    private lateinit var auth: FirebaseAuth
     val reg_name: TextInputLayout by lazy {
         findViewById(R.id.register_name_til)
     }
@@ -35,40 +21,14 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
         val btn = findViewById<TextView>(R.id.register_register_btn)
-        btn.setOnClickListener { doRegister(btn) }
-        auth = Firebase.auth
+        btn.setOnClickListener {  }
 
         val btnLogin = findViewById<Button>(R.id.register_login_btn)
         btnLogin.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
-    }
-
-    fun doRegister(v: View) {
-        val name= reg_name.editText!!.text.toString()
-        val email = reg_email.editText!!.text.toString()
-        val password = reg_password.editText!!.text.toString()
-
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    //val newUser = User(name, email)
-                    //User.addUser(newUser)
-                    Toast.makeText(
-                        baseContext,
-                        "Register success",
-                        Toast.LENGTH_SHORT,
-                    ).show()
-                } else {
-                    Toast.makeText(
-                        baseContext,
-                        "Register failed.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
-                }
-            }
     }
 
 }

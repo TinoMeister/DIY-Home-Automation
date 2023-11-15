@@ -16,6 +16,8 @@ class CustomRestrictionAdapter(context: Context, resource: Int, objects: Mutable
     private var mValues: MutableList<String>
     private var mResource: Int
 
+    var onItemClick : ((String) -> Unit)? = null
+
     init {
         mContext = context
         mValues = objects
@@ -40,6 +42,10 @@ class CustomRestrictionAdapter(context: Context, resource: Int, objects: Mutable
         vh.title?.text = value
         vh.isActive?.isChecked = position % 2 == 1
         //vh.body?.text = value.body
+
+        view.setOnClickListener {
+            onItemClick?.invoke(value)
+        }
 
         return view
     }

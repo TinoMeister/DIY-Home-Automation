@@ -58,6 +58,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnLogin.setOnClickListener {
+            /*
             val email = email.editText!!.text.toString()
             val password = password.editText!!.text.toString()
 
@@ -75,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 })
             }
-
+            */
 
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)

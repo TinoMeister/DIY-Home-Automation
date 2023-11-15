@@ -57,7 +57,6 @@ class CustomScheduleAdapter(context: Context, resource: Int, objects: MutableLis
         val time = view?.findViewById<TextView>(R.id.cardSchedule_time_tv)
         val day = view?.findViewById<TextView>(R.id.cardSchedule_day_tv)
         val total = view?.findViewById<TextView>(R.id.cardSchedule_total_tv)
-        @SuppressLint("UseSwitchCompatOrMaterialCode")
         val isActive = view?.findViewById<Switch>(R.id.cardSchedule_active_sw)
     }
 }

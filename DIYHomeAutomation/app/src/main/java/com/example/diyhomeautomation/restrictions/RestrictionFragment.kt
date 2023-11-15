@@ -1,5 +1,6 @@
 package com.example.diyhomeautomation.restrictions
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.diyhomeautomation.R
 import com.example.diyhomeautomation.customs.CustomRestrictionAdapter
+import com.example.diyhomeautomation.schedules.ScheduleCUActivity
 
 class RestrictionFragment : Fragment() {
     private lateinit var myView: View
@@ -57,11 +59,10 @@ class RestrictionFragment : Fragment() {
         subText.text = getString(R.string.create_your_restrictions)
 
         addBtn.setOnClickListener {
-            //val intent = Intent(this.activity, RoomCUActivity::class.java)
-            //startActivity(intent)
+            val intent = Intent(this.activity, RestrictionCUActivity::class.java)
+            startActivity(intent)
         }
-        notificationBtn.setOnClickListener {
-        }
+        notificationBtn.visibility = View.GONE
 
         action1.text = "All"
         action1.setOnClickListener {
@@ -90,8 +91,9 @@ class RestrictionFragment : Fragment() {
         val adapter = CustomRestrictionAdapter(myView.context, layout, testValues.toMutableList())
         lst.adapter = adapter
 
-        lst.onItemClickListener = AdapterView.OnItemClickListener { _, _, _, _ ->
-            //val str = (adapterView.adapter as CustomHomeRoomsGridView).getItem(position)
+        adapter.onItemClick = {
+            val intent = Intent(myActivity, RestrictionCUActivity::class.java)
+            startActivity(intent)
         }
     }
 }
