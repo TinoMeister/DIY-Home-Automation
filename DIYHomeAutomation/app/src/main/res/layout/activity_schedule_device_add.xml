@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context=".schedules.ScheduleDeviceAddActivity">
+    tools:context=".schedules.ScheduleDeviceAddActivity"
+    >
 
     <TextView
         android:id="@+id/schedule_device_add_roomtv"
@@ -41,7 +42,7 @@
 </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/schedule_device_add_devicetv"
+        android:id="@+id/schedule_device_add_Devicetv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Select Device Name"
@@ -60,7 +61,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/schedule_device_add_devicetv"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_device_add_Devicetv"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
 
 
@@ -72,15 +73,35 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_marginTop="60dp"
         app:layout_constraintTop_toBottomOf="@id/schedule_device_add_ddlst_device"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
         >
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="right">
+
+        <TextView
+            android:id="@+id/cardHomeDev_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:hint="Power"
+            android:textSize="15sp"/>
 
         <Switch
             android:id="@+id/cardHomeDev_active_sw"
@@ -95,6 +116,28 @@
             />
 
 
-    </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/schedule_device_add_valuetv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/schedule_device_add_Devicetv"
+        android:layout_marginTop="180dp"
+        android:hint="Value:"
+        >
+    </TextView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/schedule_device_add_valuetv"
+        android:layout_marginTop="300dp"
+        android:text="@string/save"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
