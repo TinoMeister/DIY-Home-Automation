@@ -294,3 +294,15 @@ C:\Users\tiago\Code\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAP
 C:\Users\tiago\Code\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\bin\Debug\net6.0\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\tiago\Code\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\obj\Debug\net6.0\DIYHomeAutomationAPI.RazorAssemblyInfo.cache
 C:\Users\tiago\Code\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\obj\Debug\net6.0\DIYHomeAutomationAPI.RazorAssemblyInfo.cs
+C:\Users\arant\Desktop\LESI\3-1\PA\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\obj\Debug\net6.0\DIYHomeAutomationAPI.csproj.AssemblyReference.cache
+C:\Users\arant\Desktop\LESI\3-1\PA\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\obj\Debug\net6.0\DIYHomeAutomationAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\arant\Desktop\LESI\3-1\PA\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\obj\Debug\net6.0\DIYHomeAutomationAPI.AssemblyInfoInputs.cache
+C:\Users\arant\Desktop\LESI\3-1\PA\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\obj\Debug\net6.0\DIYHomeAutomationAPI.AssemblyInfo.cs
+C:\Users\arant\Desktop\LESI\3-1\PA\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\obj\Debug\net6.0\DIYHomeAutomationAPI.csproj.CoreCompileInputs.cache
+C:\Users\arant\Desktop\LESI\3-1\PA\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\obj\Debug\net6.0\DIYHomeAutomationAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\arant\Desktop\LESI\3-1\PA\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\obj\Debug\net6.0\DIYHomeAutomationAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\arant\Desktop\LESI\3-1\PA\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\obj\Debug\net6.0\DIYHomeAutomationAPI.RazorAssemblyInfo.cache
+C:\Users\arant\Desktop\LESI\3-1\PA\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\obj\Debug\net6.0\DIYHomeAutomationAPI.RazorAssemblyInfo.cs
+C:\Users\arant\Desktop\LESI\3-1\PA\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\obj\Debug\net6.0\DIYHomeAutomationAPI.dll
+C:\Users\arant\Desktop\LESI\3-1\PA\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\obj\Debug\net6.0\refint\DIYHomeAutomationAPI.dll
+C:\Users\arant\Desktop\LESI\3-1\PA\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\obj\Debug\net6.0\DIYHomeAutomationAPI.pdb

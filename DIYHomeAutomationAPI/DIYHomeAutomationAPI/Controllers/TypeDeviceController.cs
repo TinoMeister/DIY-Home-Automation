@@ -14,7 +14,7 @@ namespace DIYHomeAutomationAPI.Controllers
         public TypeDeviceController(SensorDbContext context) => _context = context;
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TypeDevice>>> GetRooms() =>
+        public async Task<ActionResult<IEnumerable<TypeDevice>>> GetTypeDevices() =>
             await _context.TypeDevices.ToListAsync();
     }
 }
