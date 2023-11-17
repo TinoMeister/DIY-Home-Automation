@@ -78,7 +78,7 @@ namespace DIYHomeAutomationAPI.Controllers
         {
             // Verify if the are any Notifications in the database, if not then return NotFound
             if (_context.Notifications.IsNullOrEmpty())
-                return BadRequest();
+                return NotFound();
 
             // Get the notification by the id
             Notification? notification = await _context.Notifications.FindAsync(id);
@@ -87,12 +87,17 @@ namespace DIYHomeAutomationAPI.Controllers
             return await DeleteNotification(notification);
         }
 
+        /// <summary>
+        /// This method removes an Notification from the database
+        /// </summary>
+        /// <param name="notification">notification object</param>
+        /// <returns>Method result</returns>
         [HttpDelete]
         public async Task<ActionResult> DeleteNotification(Notification? notification)
         {
-            // Verify if the are any Notifications in the database or if the Notification is null, if not then return NotFound
+            // Verify if the are any Notifications in the database or if the Notification is null, if not then return NotFound 
             if (_context.Notifications.IsNullOrEmpty() || notification is null)
-                return BadRequest();
+                return NotFound();
 
             // Put the Notification as an entry an set the state as remove from database
             _context.Notifications.Remove(notification);

@@ -44,6 +44,7 @@ namespace DIYHomeAutomationAPI.Controllers
             // Verify if the history receibed is not null
             if (history is null)
                BadRequest();
+
             // Add the history to an entity entry to insert into the database
             _context.Histories.Add(history);
 

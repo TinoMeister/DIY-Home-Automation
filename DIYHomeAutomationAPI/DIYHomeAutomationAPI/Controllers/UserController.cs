@@ -15,10 +15,19 @@ namespace DIYHomeAutomationAPI.Controllers
 
         public UserController(SensorDbContext context) => _context = context;
 
+        /// <summary>
+        /// This method search in the database all the Users.
+        /// </summary>
+        /// <returns>List with all the Users</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers() =>
             await _context.Users.ToListAsync();
 
+        /// <summary>
+        /// This method creates a new User
+        /// </summary>
+        /// <param name="user">User's Object</param>
+        /// <returns>Method result</returns>
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User? user)
         {
@@ -39,6 +48,12 @@ namespace DIYHomeAutomationAPI.Controllers
             return await _context.Users.OrderByDescending(u => u.Id).FirstAsync();
         }
 
+        /// <summary>
+        /// This method updates an User
+        /// </summary>
+        /// <param name="id">User's id</param>
+        /// <param name="user">User object</param>
+        /// <returns>Method result</returns>
         [HttpPut("{id}")]
         public async Task<ActionResult> PutUser(int id, User? user)
         {
@@ -60,6 +75,11 @@ namespace DIYHomeAutomationAPI.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// This method removes a User from the database
+        /// </summary>
+        /// <param name="id">User's id</param>
+        /// <returns>Method result</returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(int id)
         {
@@ -74,6 +94,11 @@ namespace DIYHomeAutomationAPI.Controllers
             return await DeleteUser(user);
         }
 
+        /// <summary>
+        ///  This method removes a User from the database
+        /// </summary>
+        /// <param name="user">User's object</param>
+        /// <returns>Method result</returns>
         [HttpDelete]
         public async Task<ActionResult> DeleteUser(User? user)
         {

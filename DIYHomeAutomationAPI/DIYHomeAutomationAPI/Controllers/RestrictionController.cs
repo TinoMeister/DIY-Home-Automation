@@ -15,10 +15,19 @@ namespace DIYHomeAutomationAPI.Controllers
 
         public RestrictionController(SensorDbContext context) => _context = context;
 
+        /// <summary>
+        /// This method search in the database all the Restrictions.
+        /// </summary>
+        /// <returns>List with all the Restrictions</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Restriction>>> GetRestrictions() =>
             await _context.Restrictions.ToListAsync();
 
+        /// <summary>
+        /// This method creates a new Restriction
+        /// </summary>
+        /// <param name="restriction">Restrictition object</param>
+        /// <returns>Method result</returns>
         [HttpPost]
         public async Task<ActionResult<Restriction>> PostRestriction(Restriction? restriction)
         {
@@ -26,7 +35,7 @@ namespace DIYHomeAutomationAPI.Controllers
             if (restriction is null)
                 BadRequest();
 
-            // If there is alredy an restriction equals then throw a exception
+            // If there is alredy an restriction equals then return BadRequest
             if (await _context.Restrictions.Where(r =>
                 r.Condition.Equals(restriction.Condition) &&
                 r.Name.Equals(restriction.Name) &&
@@ -50,13 +59,19 @@ namespace DIYHomeAutomationAPI.Controllers
             return await _context.Restrictions.OrderByDescending(r => r.Id).FirstAsync();
         }
 
+        /// <summary>
+        /// This method updates an Restriction
+        /// </summary>
+        /// <param name="id">Restriction id</param>
+        /// <param name="restriction">Restriction object</param>
+        /// <returns>Method result</returns>
         [HttpPut("{id}")]
         public async Task<ActionResult> PutRestriction(int id, Restriction? restriction)
         {
             if (restriction is null || id != restriction.Id)
                 BadRequest();
 
-            // If there is alredy an restriction equals then throw a exception
+            // If there is alredy an restriction equals then return a BadRequest
             if (await _context.Restrictions.Where(r =>
                 !r.Id.Equals(restriction.Id) &&
                 r.Condition.Equals(restriction.Condition) &&
@@ -81,12 +96,18 @@ namespace DIYHomeAutomationAPI.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// This method removes an Restriction from the database
+        /// </summary>
+        /// <param name="id">Restriction id</param>
+        /// <returns>Method result</returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteRestriction(int id)
         {
             // Verify if the are any restrictions in the database, if not then return NotFound
             if (_context.Restrictions.IsNullOrEmpty())
-             BadRequest();
+             NotFound();
+
             // Get the restriction by the id
             Restriction? restriction = await _context.Restrictions.FindAsync(id);
 
@@ -104,7 +125,8 @@ namespace DIYHomeAutomationAPI.Controllers
         {
             // Verify if the are any restrictions in the database or if the restriction is null, if not then return NotFound
             if (_context.Restrictions.IsNullOrEmpty() || restriction is null)
-                BadRequest();
+                NotFound();
+
             // Put the restriction as an entry an set the sate as remove from database
             _context.Restrictions.Remove(restriction);
 
