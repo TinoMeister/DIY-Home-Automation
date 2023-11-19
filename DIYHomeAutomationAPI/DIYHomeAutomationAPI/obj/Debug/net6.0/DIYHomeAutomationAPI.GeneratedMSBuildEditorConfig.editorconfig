@@ -1,0 +1,41 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = DIYHomeAutomationAPI
+build_property.RootNamespace = DIYHomeAutomationAPI
+build_property.ProjectDir = C:\Users\arant\Desktop\LESI\3-1\PA\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\arant\Desktop\LESI\3-1\PA\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/arant/Desktop/LESI/3-1/PA/DIY-Home-Automation/DIYHomeAutomationAPI/DIYHomeAutomationAPI/Views/Rooms/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/arant/Desktop/LESI/3-1/PA/DIY-Home-Automation/DIYHomeAutomationAPI/DIYHomeAutomationAPI/Views/Rooms/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/arant/Desktop/LESI/3-1/PA/DIY-Home-Automation/DIYHomeAutomationAPI/DIYHomeAutomationAPI/Views/Rooms/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/arant/Desktop/LESI/3-1/PA/DIY-Home-Automation/DIYHomeAutomationAPI/DIYHomeAutomationAPI/Views/Rooms/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/arant/Desktop/LESI/3-1/PA/DIY-Home-Automation/DIYHomeAutomationAPI/DIYHomeAutomationAPI/Views/Rooms/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9vbXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/arant/Desktop/LESI/3-1/PA/DIY-Home-Automation/DIYHomeAutomationAPI/DIYHomeAutomationAPI/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
