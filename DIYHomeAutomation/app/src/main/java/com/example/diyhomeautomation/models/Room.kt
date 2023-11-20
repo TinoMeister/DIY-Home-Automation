@@ -1,10 +1,8 @@
 package com.example.diyhomeautomation.models
 
-data class User(
+data class Room(
     var id: Int,
     var name: String,
-    var email: String,
-    var password: String
+    var icon: String?,
+    var userId: Int
 )
-
-

@@ -1,14 +1,12 @@
-package com.example.diyhomeautomation.schedules
+package com.example.diyhomeautomation.restrictions
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import com.example.diyhomeautomation.R
 
-class ScheduleCUActivity : AppCompatActivity() {
-
+class RestrictionCUActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_schedule_cu)
-
+        setContentView(R.layout.activity_restriction_cu)
     }
 }
