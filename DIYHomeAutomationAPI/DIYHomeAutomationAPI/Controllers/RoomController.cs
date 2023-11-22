@@ -32,7 +32,7 @@ namespace DIYHomeAutomationAPI.Controllers
         /// <param name="room"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<Room>> PostHistory(Room room)
+        public async Task<ActionResult<Room>> PostRoom(Room room)
         {
             // Verify if the room receibed is not null
             if (room is null) return BadRequest();

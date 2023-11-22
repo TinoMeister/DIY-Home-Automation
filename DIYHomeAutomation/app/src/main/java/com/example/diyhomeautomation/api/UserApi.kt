@@ -10,7 +10,6 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.DELETE
 
-
 interface UserApi {
     @GET("/users")
     fun getAllUsers(): Call<List<User>>
