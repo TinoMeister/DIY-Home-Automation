@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Reflection;
 
 namespace DIYHomeAutomationAPI.Controllers
 {
+    // A FUNCIONAR 100%
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -32,11 +32,12 @@ namespace DIYHomeAutomationAPI.Controllers
         public async Task<ActionResult<User>> PostUser(User? user)
         {
             // Verify if the user receibed is null
-            if (user is null)
-                BadRequest();
-            // If the userName alredy exists then throw a exception
-            if (await _context.Users.Where(u => u.Name.Equals(user.Name)).FirstOrDefaultAsync() is not null)
-                BadRequest();
+            if (user is null) 
+                return BadRequest();
+
+            // If the Email alredy exists then throw a exception
+            if (await _context.Users.Where(u => u.Email.Equals(user.Email)).FirstOrDefaultAsync() is not null)
+                return BadRequest();
 
             // Add the User to an entity entry to insert into the database
             _context.Users.Add(user);
@@ -59,11 +60,11 @@ namespace DIYHomeAutomationAPI.Controllers
         {
             // Verify if the user receibed is not null or if the user id are the same
             if (user is null || id != user.Id)
-                BadRequest();
+                return BadRequest();
 
             // If the Name alredy exists then throw a BadRequest()
             if (await _context.Users.Where(u => !u.Id.Equals(user.Id) && u.Name.Equals(user.Name)).FirstOrDefaultAsync() is not null)
-                BadRequest();
+                return BadRequest();
 
             // Put the user as an entry an set the sate as modified to update the database
             _context.Entry(user).State = EntityState.Modified;
@@ -85,7 +86,7 @@ namespace DIYHomeAutomationAPI.Controllers
         {
             // Verify if the are any users in the database, if not then throw exception
             if (_context.Users.IsNullOrEmpty())
-                BadRequest();
+                return BadRequest();
 
             // Get the user by the id
             User? user = await _context.Users.FindAsync(id);
@@ -104,7 +105,7 @@ namespace DIYHomeAutomationAPI.Controllers
         {
             // Verify if the are any users in the database or if the user is null, if not then throw exception
             if (_context.Users.IsNullOrEmpty() || user is null)
-                BadRequest();
+                return BadRequest();
             // Put the user as an entry an set the sate as remove from database
             _context.Users.Remove(user);
 

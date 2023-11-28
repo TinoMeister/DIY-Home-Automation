@@ -21,7 +21,7 @@ namespace DIYHomeAutomationAPI.Models
         /// <summary>
         /// Restriction's State
         /// </summary>
-        public GeralState State { get; set; }
+        public bool State { get; set; }
 
         /// <summary>
         /// Restriction's Condition
@@ -36,7 +36,7 @@ namespace DIYHomeAutomationAPI.Models
         /// <summary>
         /// Primary Sensor's State
         /// </summary>
-        public GeralState PrimarySensorState { get; set; }
+        public bool PrimarySensorState { get; set; }
 
         /// <summary>
         /// Primary Sensor's Value
@@ -51,7 +51,7 @@ namespace DIYHomeAutomationAPI.Models
         /// <summary>
         /// Secondary Sensor's State
         /// </summary>
-        public GeralState SecondarySensorState { get; set; }
+        public bool SecondarySensorState { get; set; }
 
         /// <summary>
         /// Secondary Sensor's Value

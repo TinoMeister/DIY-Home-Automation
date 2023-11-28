@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace DIYHomeAutomationAPI.Controllers
 {
+    // A FUNCIONAR 100%
     [Route("api/[controller]")]
     [ApiController]
     public class TypeDeviceController : ControllerBase
@@ -22,6 +23,8 @@ namespace DIYHomeAutomationAPI.Controllers
         public async Task<ActionResult<IEnumerable<TypeDevice>>> GetTypeDevices() =>
             await _context.TypeDevices.ToListAsync();
 
+
+        /*
         /// <summary>
         /// This method creates a new Device type
         /// </summary>
@@ -107,5 +110,7 @@ namespace DIYHomeAutomationAPI.Controllers
             // If is successfully then returns an OK
             return Ok();
         }
+
+        */
     }
 }
