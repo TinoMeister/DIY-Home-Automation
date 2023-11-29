@@ -58,7 +58,7 @@ class RestrictionFragment : Fragment() {
         mainText.text = getString(R.string.restrictions)
         subText.text = getString(R.string.create_your_restrictions)
 
-        addBtn.setOnClickListener {
+       addBtn.setOnClickListener {
             val intent = Intent(this.activity, RestrictionCUActivity::class.java)
             startActivity(intent)
         }

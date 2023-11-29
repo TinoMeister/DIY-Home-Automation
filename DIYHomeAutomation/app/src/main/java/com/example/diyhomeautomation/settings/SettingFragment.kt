@@ -1,33 +1,60 @@
 package com.example.diyhomeautomation.settings
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import com.example.diyhomeautomation.MainActivity
 import com.example.diyhomeautomation.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-/**
- * A simple [Fragment] subclass.
- * Use the [SettingFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SettingFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var myView: View
+    private lateinit var myActivity: FragmentActivity
+
+    private val layoutTop: LinearLayout by lazy {
+        myActivity.findViewById(R.id.main_ln)
+         }
+
+    /*
+    private val notifbtn: LinearLayout by lazy {
+        myView.findViewById(R.id.Notification_LL)
+    }
+    private val logoutBtn: LinearLayout by lazy {
+        myView.findViewById(R.id.LogOut_LL)
+    }
+    private val uzsettingbtn: Button by lazy {
+        myView.findViewById(R.id.setting_btn)
+    }
+
+    */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+        myActivity = this.requireActivity()
+
+        layoutTop.visibility=View.INVISIBLE
+
+        /*
+        notifbtn.setOnClickListener{
+            val intent = Intent(this.activity, NotificationFragment::class.java)
+          startActivity(intent)
+       }
+
+        logoutBtn.setOnClickListener{
+            val intent = Intent(this.activity, MainActivity::class.java)
+            startActivity(intent)
         }
+         */
+
+        // para o usar NOT YET IMPLEMENTADO
+       // uzsettingbtn.setOnClickListener {
+       //     val intent = Intent(this.activity, UserActivity::class.java)
+        //}
 
         this.activity?.findViewById<LinearLayout>(R.id.main_ln)?.visibility = View.GONE
     }
@@ -35,28 +62,9 @@ class SettingFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        myView = inflater.inflate(R.layout.fragment_setting, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setting, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SettingFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SettingFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        return myView
     }
 }
