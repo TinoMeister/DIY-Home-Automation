@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:id="@+id/login_logo_iv"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:transitionName="logo_tn"
+        app:srcCompat="@drawable/logo_original" />
+
+    <TextView
+        android:id="@+id/login_welcome_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:fontFamily="@font/bungee"
+        android:transitionName="name_tn"
+        android:text="@string/hello_there_welcome_back"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/login_desc_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:transitionName="desc_tn"
+        android:text="@string/sign_in_to_continue"
+        android:textSize="18sp"/>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/login_email_til"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:transitionName="email_tn"
+            android:hint="@string/email"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/login_password_til"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:transitionName="password_tn"
+            android:hint="@string/password"
+            app:passwordToggleEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/login_login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:transitionName="button_tn"
+        android:text="@string/login"
+        android:layout_marginBottom="5dp"/>
+
+    <Button
+        android:id="@+id/login_register_btn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:transitionName="signin_signup_tn"
+        android:text="@string/new_user_sign_up"/>
+
+</LinearLayout>
