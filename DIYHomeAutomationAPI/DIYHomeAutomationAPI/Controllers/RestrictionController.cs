@@ -1,11 +1,12 @@
 ﻿using DIYHomeAutomationAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Reflection;
 
 namespace DIYHomeAutomationAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RestrictionController : ControllerBase
@@ -18,10 +19,38 @@ namespace DIYHomeAutomationAPI.Controllers
         /// <summary>
         /// This method search in the database all the Restrictions.
         /// </summary>
+        /// <param name="userId">User's Id</param>
         /// <returns>List with all the Restrictions</returns>
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Restriction>>> GetRestrictions() =>
-            await _context.Restrictions.ToListAsync();
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<IEnumerable<Restriction>>> GetRestrictions(string userId)
+        {
+            return await (
+                from r in _context.Rooms
+                join d in _context.Devices on r.Id equals d.RoomId
+                join re in _context.Restrictions on d.Id equals re.PrimarySensorId
+                where r.UserId == userId
+                select re
+            ).ToListAsync();
+        }
+
+        /// <summary>
+        /// This method search in the database all the Restrictions.
+        /// </summary>
+        /// <param name="espName">Esp's Name</param>
+        /// <returns>List with all the Restrictions</returns>
+        [AllowAnonymous]
+        [HttpGet("Esp/{espName}")]
+        public async Task<ActionResult<IEnumerable<Restriction>>> GetRestrictionsEsp(string espName)
+        {
+            return await (
+                from e in _context.Esps
+                join r in _context.Rooms on e.Id equals r.EspId
+                join d in _context.Devices on r.Id equals d.RoomId
+                join re in _context.Restrictions on d.Id equals re.PrimarySensorId
+                where e.Name == espName
+                select re
+            ).ToListAsync();
+        }
 
         /// <summary>
         /// This method creates a new Restriction
@@ -33,7 +62,7 @@ namespace DIYHomeAutomationAPI.Controllers
         {
             // Verify if the restriction receibed is not null
             if (restriction is null)
-                BadRequest();
+                return BadRequest();
 
             // If there is alredy an restriction equals then return BadRequest
             if (await _context.Restrictions.Where(r =>
@@ -47,7 +76,7 @@ namespace DIYHomeAutomationAPI.Controllers
                 r.SecondarySensorValue.Equals(restriction.SecondarySensorValue) && 
                 r.SecondarySensorState.Equals(restriction.SecondarySensorState)
                 ).FirstOrDefaultAsync() is not null)
-                BadRequest();
+                return BadRequest();
 
             // Add the restriction to an entity entry to insert into the database
             _context.Restrictions.Add(restriction);
@@ -69,7 +98,7 @@ namespace DIYHomeAutomationAPI.Controllers
         public async Task<ActionResult> PutRestriction(int id, Restriction? restriction)
         {
             if (restriction is null || id != restriction.Id)
-                BadRequest();
+                return BadRequest();
 
             // If there is alredy an restriction equals then return a BadRequest
             if (await _context.Restrictions.Where(r =>
@@ -84,7 +113,7 @@ namespace DIYHomeAutomationAPI.Controllers
                 r.SecondarySensorValue.Equals(restriction.SecondarySensorValue) &&
                 r.SecondarySensorState.Equals(restriction.SecondarySensorState)
                 ).FirstOrDefaultAsync() is not null)
-                BadRequest();
+                return BadRequest();
 
             // Put the restriction as an entry an set the sate as modified to update the database
             _context.Entry(restriction).State = EntityState.Modified;
@@ -106,7 +135,7 @@ namespace DIYHomeAutomationAPI.Controllers
         {
             // Verify if the are any restrictions in the database, if not then return NotFound
             if (_context.Restrictions.IsNullOrEmpty())
-             NotFound();
+             return NotFound();
 
             // Get the restriction by the id
             Restriction? restriction = await _context.Restrictions.FindAsync(id);
@@ -125,7 +154,7 @@ namespace DIYHomeAutomationAPI.Controllers
         {
             // Verify if the are any restrictions in the database or if the restriction is null, if not then return NotFound
             if (_context.Restrictions.IsNullOrEmpty() || restriction is null)
-                NotFound();
+                return NotFound();
 
             // Put the restriction as an entry an set the sate as remove from database
             _context.Restrictions.Remove(restriction);
@@ -136,7 +165,5 @@ namespace DIYHomeAutomationAPI.Controllers
             // If is successfully then returns an OK
             return Ok();
         }
-
-
     }
 }

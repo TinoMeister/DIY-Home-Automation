@@ -1,26 +1,102 @@
-using System.Net.Sockets;
-using System.Net;
-using Microsoft.EntityFrameworkCore;
 using DIYHomeAutomationAPI.Models;
+using DIYHomeAutomationAPI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
+builder.Services.AddSwaggerGen(option =>
+{
+    option.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Title",
+        Description = "Description",
+        Version = "v1",
+        Contact = new()
+        {
+            Name = "Name",
+            Email = "Email"
+        }
+    });
+
+    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter a valid token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+
+    option.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
+
+// Add DB Contexts
 builder.Services.AddDbContext<SensorDbContext>(op =>
     op.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
 
+// Register our TokenService dependency
+builder.Services.AddScoped<JwtService>();
+
+// Support string to enum conversions
+builder.Services.AddControllers().AddJsonOptions(opt =>
+{
+    opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
+
+// Specify identity requirements
+builder.Services.AddIdentityCore<ApplicationUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+    options.User.RequireUniqueEmail = true;
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+}).AddEntityFrameworkStores<SensorDbContext>();
+
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ClockSkew = TimeSpan.Zero,
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)
+            )
+        };
+    });
+
 var app = builder.Build();
-
-//Setup local IP
-string localIP = LocalIPAddress();
-
-app.Urls.Add("http://" + localIP + ":7064");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -29,23 +105,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseHttpsRedirection();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
-
-// Get local Ip Address
-static string LocalIPAddress()
-{
-    using Socket socket = new(AddressFamily.InterNetwork, SocketType.Dgram, 0);
-    socket.Connect("8.8.8.8", 65530);
-    if (socket.LocalEndPoint is IPEndPoint endPoint)
-    {
-        return endPoint.Address.ToString();
-    }
-    else
-    {
-        return "127.0.0.1";
-    }
-}

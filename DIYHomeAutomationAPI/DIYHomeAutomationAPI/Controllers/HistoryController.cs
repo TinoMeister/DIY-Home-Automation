@@ -1,10 +1,11 @@
 ﻿using DIYHomeAutomationAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 namespace DIYHomeAutomationAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class HistoryController : ControllerBase
@@ -15,35 +16,32 @@ namespace DIYHomeAutomationAPI.Controllers
         public HistoryController(SensorDbContext context) => _context = context;
 
         /// <summary>
-        /// This method search in the database all the Histories
+        /// This method search in the database all the Histories.
         /// </summary>
-        /// <returns>List with all the Histories</returns>
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<History>>> GetHistory() =>
-            // Return an List with all the Histories
-            await _context.Histories.ToListAsync();
-
-        /// <summary>
-        /// This method search in the database all the Histories that has the same device Id
-        /// </summary>
-        /// <param name="deviceId">Device id</param>
+        /// <param name="userId">User's Id</param>
         /// <returns>List of all the Histories</returns>
-        [HttpGet("{deviceId}")]
-        public async Task<ActionResult<IEnumerable<History>>> GetHistories(int deviceId) =>
-            // Get an List with all the Histories with the same device Id
-            await _context.Histories.Where(h => h.DeviceId == deviceId).ToListAsync();
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<IEnumerable<History>>> GetHistories(string userId) =>
+            await (
+                from r in _context.Rooms
+                join d in _context.Devices on r.Id equals d.RoomId
+                join h in _context.Histories on d.Id equals h.DeviceId
+                where r.UserId == userId
+                select h
+            ).ToListAsync();
 
         /// <summary>
         /// This method creates a new History
         /// </summary>
         /// <param name="history">History object</param>
         /// <returns>Method Result</returns>
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult> PostHistory(History? history)
         {
             // Verify if the history receibed is not null
             if (history is null)
-               BadRequest();
+               return BadRequest();
 
             // Add the history to an entity entry to insert into the database
             _context.Histories.Add(history);
@@ -54,6 +52,5 @@ namespace DIYHomeAutomationAPI.Controllers
             // If is successfully then returns an OK
             return Ok();
         }
-
     }
 }

@@ -16,18 +16,8 @@
         public int TaskId { get; set; }
 
         /// <summary>
-        /// Task's Object
-        /// </summary>
-        public Task? Task { get; set; }
-
-        /// <summary>
         /// Device's Id
         /// </summary>
         public int DeviceId { get; set; }
-
-        /// <summary>
-        /// Device's Object
-        /// </summary>
-        public Device? Device { get; set; }
     }
 }

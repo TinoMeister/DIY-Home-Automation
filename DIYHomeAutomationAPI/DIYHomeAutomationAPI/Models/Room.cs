@@ -23,6 +23,11 @@
         /// <summary>
         /// User's Id
         /// </summary>
-        public int UserId { get; set; }
+        public string UserId { get; set; } = null!;
+
+        /// <summary>
+        /// Esp's Id
+        /// </summary>
+        public int EspId { get; set; }
     }
 }

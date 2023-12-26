@@ -1,11 +1,9 @@
 ﻿using DIYHomeAutomationAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 namespace DIYHomeAutomationAPI.Controllers
 {
-    // A FUNCIONAR 100%
     [Route("api/[controller]")]
     [ApiController]
     public class TypeDeviceController : ControllerBase
