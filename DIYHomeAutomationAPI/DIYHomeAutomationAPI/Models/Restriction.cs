@@ -46,12 +46,12 @@ namespace DIYHomeAutomationAPI.Models
         /// <summary>
         /// Secondary Sensor's Id
         /// </summary>
-        public int SecondarySensorId { get; set; }
+        public int? SecondarySensorId { get; set; }
 
         /// <summary>
         /// Secondary Sensor's State
         /// </summary>
-        public bool SecondarySensorState { get; set; }
+        public bool? SecondarySensorState { get; set; }
 
         /// <summary>
         /// Secondary Sensor's Value

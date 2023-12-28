@@ -1,11 +1,12 @@
 ﻿using DIYHomeAutomationAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Reflection;
 
 namespace DIYHomeAutomationAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class NotificationController : ControllerBase
@@ -16,24 +17,39 @@ namespace DIYHomeAutomationAPI.Controllers
         public NotificationController(SensorDbContext context) => _context = context;
 
         /// <summary>
-        /// This method search in the database all the Notifications
+        /// This method search in the database all the Notifications by userId 
         /// </summary>
+        /// <param name="userId">User's Id</param>
         /// <returns>List with all the notifications</returns>
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Notification>>> GetNotifications() =>
-            //Returns a list with all the notifications
-            await _context.Notifications.ToListAsync();
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<IEnumerable<Notification>>> GetNotifications(string userId) =>
+            await (
+                 from r in _context.Rooms
+                 join d in _context.Devices on r.Id equals d.RoomId
+                 join n in _context.Notifications on d.Id equals n.DeviceId
+                 where r.UserId == userId
+                 select n
+            ).Union(
+                from r in _context.Rooms
+                join d in _context.Devices on r.Id equals d.RoomId
+                join t in _context.TaskDevices on d.Id equals t.DeviceId
+                join n in _context.Notifications on t.TaskId equals n.TaskId
+                where r.UserId == userId
+                select n
+            ).Distinct().OrderByDescending(n => n.Time).ToListAsync();
 
         /// <summary>
         /// This method creates a new Notification
         /// </summary>
         /// <param name="notification">Notification object</param>
         /// <returns>Method Result</returns>
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult> PostNotification(Notification? notification)
         {
             // Verify if the notification receibed is not null
-            if (notification is null) return BadRequest();
+            if (notification is null) 
+                return BadRequest();
             
             // Add the notification to an entity entry to insert into the database
             _context.Notifications.Add(notification);

@@ -35,12 +35,12 @@ namespace DIYHomeAutomationAPI.Models
         /// <summary>
         /// Task's Id
         /// </summary>
-        public int TaskId { get; set; }
+        public int? TaskId { get; set; }
 
         /// <summary>
         /// Device's Id
         /// </summary>
-        public int DeviceId { get; set; }
+        public int? DeviceId { get; set; }
 
     }
 }
