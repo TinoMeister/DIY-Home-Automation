@@ -20,7 +20,7 @@ namespace DIYHomeAutomationAPI.Models
         /// <summary>
         /// Task's State
         /// </summary>
-        public GeralState State { get; set; }
+        public bool State { get; set; }
 
         /// <summary>
         /// Task's InitHour

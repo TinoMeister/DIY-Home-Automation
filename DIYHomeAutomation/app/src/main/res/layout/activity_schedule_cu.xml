@@ -109,7 +109,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="145dp"
-        android:layout_margin="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="5dp">
 
@@ -117,77 +118,85 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_margin="10dp">
+            android:layout_margin="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="0dp"
                 android:layout_weight="1"
+                android:orientation="horizontal"
                 android:weightSum="4">
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_margin="5dp"
                     android:elevation="5dp"
-                    android:text="Mon" />
+                    android:text="Mon"
+                    android:textSize="11sp"/>
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_margin="5dp"
                     android:elevation="5dp"
-                    android:text="Tue"/>
+                    android:text="Tue"
+                    android:textSize="11sp"/>
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_margin="5dp"
                     android:elevation="5dp"
-                    android:text="Wed"/>
+                    android:text="Wed"
+                    android:textSize="11sp"/>
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_margin="5dp"
                     android:elevation="5dp"
-                    android:text="Thu"/>
+                    android:text="Thu"
+                    android:textSize="11sp"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:weightSum="4">
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.5"
+                    android:layout_weight="1"
                     android:layout_margin="5dp"
                     android:elevation="5dp"
-                    android:text="Fri"/>
+                    android:text="Fri"
+                    android:textSize="11sp"/>
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.5"
+                    android:layout_weight="1"
                     android:layout_margin="5dp"
                     android:elevation="5dp"
-                    android:text="Sat"/>
+                    android:text="Sat"
+                    android:textSize="11sp"/>
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.5"
+                    android:layout_weight="1"
                     android:layout_margin="5dp"
                     android:elevation="5dp"
-                    android:text="Sun"/>
+                    android:text="Sun"
+                    android:textSize="11sp"/>
 
             </LinearLayout>
 
@@ -196,6 +205,7 @@
     </androidx.cardview.widget.CardView>
 
     <Button
+        android:id="@+id/schedule_cu_next_btn"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:text="Next" />

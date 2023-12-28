@@ -306,3 +306,4 @@ C:\Users\arant\Desktop\LESI\3-1\PA\DIY-Home-Automation\DIYHomeAutomationAPI\DIYH
 C:\Users\arant\Desktop\LESI\3-1\PA\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\obj\Debug\net6.0\DIYHomeAutomationAPI.dll
 C:\Users\arant\Desktop\LESI\3-1\PA\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\obj\Debug\net6.0\refint\DIYHomeAutomationAPI.dll
 C:\Users\arant\Desktop\LESI\3-1\PA\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\obj\Debug\net6.0\DIYHomeAutomationAPI.pdb
+C:\Users\tiago\Code\DIY-Home-Automation\DIYHomeAutomationAPI\DIYHomeAutomationAPI\obj\Debug\net6.0\DIYHomeAutomationAPI.sourcelink.json

@@ -7,6 +7,7 @@ using System.Reflection;
 
 namespace DIYHomeAutomationAPI.Controllers
 {
+    // A FUNCIONAR 100%
     [Route("api/[controller]")]
     [ApiController]
     public class RoomController : ControllerBase

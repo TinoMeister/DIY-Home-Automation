@@ -18,7 +18,7 @@
         /// <summary>
         /// Task's Object
         /// </summary>
-        public Task Task { get; set; }
+        public Task? Task { get; set; }
 
         /// <summary>
         /// Device's Id
@@ -28,6 +28,6 @@
         /// <summary>
         /// Device's Object
         /// </summary>
-        public Device Device { get; set; }
+        public Device? Device { get; set; }
     }
 }

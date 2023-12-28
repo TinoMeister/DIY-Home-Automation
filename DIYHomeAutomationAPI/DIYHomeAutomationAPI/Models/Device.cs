@@ -25,7 +25,7 @@ namespace DIYHomeAutomationAPI.Models
         /// <summary>
         /// Device's State
         /// </summary>
-        public GeralState State { get; set; }
+        public bool State { get; set; }
 
         /// <summary>
         /// Device's Value

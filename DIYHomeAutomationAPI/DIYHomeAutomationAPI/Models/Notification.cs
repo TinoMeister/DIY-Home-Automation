@@ -1,4 +1,6 @@
-﻿namespace DIYHomeAutomationAPI.Models
+﻿using DIYHomeAutomationAPI.Models.Enums;
+
+namespace DIYHomeAutomationAPI.Models
 {
     /// <summary>
     /// This class represents a Notification
