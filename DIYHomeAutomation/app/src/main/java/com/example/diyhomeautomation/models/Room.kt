@@ -4,5 +4,6 @@ data class Room(
     var id: Int,
     var name: String,
     var icon: String?,
-    var userId: Int
+    var userId: Int,
+    var espId: Int
 )

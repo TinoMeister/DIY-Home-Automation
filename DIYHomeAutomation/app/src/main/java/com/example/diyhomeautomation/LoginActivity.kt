@@ -8,9 +8,12 @@ import android.util.Pair
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.diyhomeautomation.api.ApiHelper
 import com.example.diyhomeautomation.api.UserApi
+import com.example.diyhomeautomation.models.AuthRequest
+import com.example.diyhomeautomation.models.AuthResponse
 import com.example.diyhomeautomation.models.User
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.GlobalScope
@@ -58,28 +61,28 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnLogin.setOnClickListener {
-            /*
             val email = email.editText!!.text.toString()
             val password = password.editText!!.text.toString()
 
             // launching a new coroutine
             GlobalScope.launch {
-                val result = apiHelper.getUser(email, password)
+                val result = apiHelper.getUser(AuthRequest(email, password))
 
-                result.enqueue(object: Callback<User> {
-                    override fun onResponse(call: Call<User>, response: Response<User>) {
-                        TODO("Not yet implemented")
+                result.enqueue(object: Callback<AuthResponse> {
+                    override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        intent.extras?.putString("token", response.body()?.token)
+                        intent.extras?.putString("userID", response.body()?.userID)
+                        startActivity(intent)
                     }
 
-                    override fun onFailure(call: Call<User>, t: Throwable) {
-                        TODO("Not yet implemented")
+                    override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+                        Toast.makeText(this@LoginActivity,
+                            "User/Password Wrong",
+                            Toast.LENGTH_LONG).show()
                     }
                 })
             }
-            */
-
-            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(intent)
         }
     }
 

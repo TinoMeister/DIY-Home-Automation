@@ -5,13 +5,17 @@ import com.example.diyhomeautomation.models.Room
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.HEAD
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface RoomApi {
-    @GET("/rooms")
-    fun getAllRooms(): Call<List<Room>>
+    @GET("/Room")
+    fun getAllRooms(@Header("Authorization") token: String,
+                    @Query("userId") userId: String): Call<List<Room>>
 
     @POST("/rooms")
     fun postRoom(@Body value: Room): Call<Room>

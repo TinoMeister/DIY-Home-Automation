@@ -9,12 +9,13 @@ import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import com.example.diyhomeautomation.R
+import com.example.diyhomeautomation.models.Room
 
-class CustomHomeDevicesAdapter(context: Context, resource: Int, objects: MutableList<String>) :
-    ArrayAdapter<String>(context, resource, objects) {
+class CustomHomeDevicesAdapter(context: Context, resource: Int, objects: MutableList<Room>) :
+    ArrayAdapter<Room>(context, resource, objects) {
 
     private var mContext: Context
-    private var mValues: MutableList<String>
+    private var mValues: MutableList<Room>
     private var mResource: Int
 
     init {
@@ -38,7 +39,7 @@ class CustomHomeDevicesAdapter(context: Context, resource: Int, objects: Mutable
         val vh: MyViewHolder = view.tag as MyViewHolder
         val value = mValues[position]
 
-        vh.title?.text = value
+        vh.title?.text = value.name
         vh.isActive?.isChecked = position % 2 == 1
         //vh.body?.text = value.body
 

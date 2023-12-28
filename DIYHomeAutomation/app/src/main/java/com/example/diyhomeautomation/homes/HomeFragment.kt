@@ -11,11 +11,23 @@ import android.widget.GridView
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.example.diyhomeautomation.MainActivity
 import com.example.diyhomeautomation.R
+import com.example.diyhomeautomation.api.ApiHelper
+import com.example.diyhomeautomation.api.RoomApi
+import com.example.diyhomeautomation.api.UserApi
 import com.example.diyhomeautomation.customs.CustomHomeDevicesAdapter
 import com.example.diyhomeautomation.customs.CustomHomeRoomsAdapter
+import com.example.diyhomeautomation.models.AuthResponse
+import com.example.diyhomeautomation.models.Room
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeFragment : Fragment() {
 
@@ -46,13 +58,22 @@ class HomeFragment : Fragment() {
         myActivity.findViewById(R.id.main_action2_btn)
     }
 
+    private lateinit var userId: String
+    private lateinit var token: String
+    private lateinit var roomsList: List<Room>
+
     val testValues = listOf<String>("AA","BB","CC","DD","EE","FF","GG","HH","II","JJ","KK","LL",
         "MM","NN","OO","PP","QQ","RR","SS","TT","UU","VV")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val apiHelper = ApiHelper().getInstance().create(RoomApi::class.java)
+
         myActivity = this.requireActivity()
+
+        userId = myActivity.intent.extras?.getString("userId")!!
+        token = myActivity.intent.extras?.getString("token")!!
 
         layoutTop.visibility = View.VISIBLE
         mainText.text = getString(R.string.home_fg_mainText)
@@ -76,6 +97,24 @@ class HomeFragment : Fragment() {
         action2.setOnClickListener {
             updateListView(R.layout.custom_home_devices_cardview)
         }
+
+        // launching a new coroutine
+        GlobalScope.launch {
+            val result = apiHelper.getAllRooms(token, userId)
+
+            result.enqueue(object: Callback<List<Room>> {
+                override fun onResponse(call: Call<List<Room>>, response: Response<List<Room>>) {
+                    roomsList = response.body()!!
+                    updateListView(R.layout.custom_home_rooms_cardview)
+                }
+
+                override fun onFailure(call: Call<List<Room>>, t: Throwable) {
+                    Toast.makeText(myActivity,
+                        "Something went wrong",
+                        Toast.LENGTH_LONG).show()
+                }
+            })
+        }
     }
 
     override fun onCreateView(
@@ -90,12 +129,11 @@ class HomeFragment : Fragment() {
         return myView
     }
 
-
     private fun updateListView(layout: Int) {
         val adapter = if (layout == R.layout.custom_home_rooms_cardview)
-            CustomHomeRoomsAdapter(myView.context, layout, testValues.toMutableList())
+            CustomHomeRoomsAdapter(myView.context, layout, roomsList.toMutableList())
         else
-            CustomHomeDevicesAdapter(myView.context, layout, testValues.toMutableList())
+            CustomHomeDevicesAdapter(myView.context, layout, roomsList.toMutableList())
 
         lst.adapter = adapter
 
