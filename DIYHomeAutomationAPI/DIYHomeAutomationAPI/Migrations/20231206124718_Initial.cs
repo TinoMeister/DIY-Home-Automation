@@ -49,7 +49,7 @@ namespace DIYHomeAutomationAPI.Migrations
                     Value = table.Column<double>(type: "float", nullable: true),
                     Icon = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RoomId = table.Column<int>(type: "int", nullable: false),
-                    TypeSensorId = table.Column<int>(type: "int", nullable: false)
+                    TypeDeviceId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -111,12 +111,12 @@ namespace DIYHomeAutomationAPI.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     State = table.Column<bool>(type: "bit", nullable: false),
                     Condition = table.Column<int>(type: "int", nullable: false),
-                    PrimarySensorId = table.Column<int>(type: "int", nullable: false),
-                    PrimarySensorState = table.Column<bool>(type: "bit", nullable: false),
-                    PrimarySensorValue = table.Column<double>(type: "float", nullable: false),
-                    SecondarySensorId = table.Column<int>(type: "int", nullable: false),
-                    SecondarySensorState = table.Column<bool>(type: "bit", nullable: false),
-                    SecondarySensorValue = table.Column<double>(type: "float", nullable: true)
+                    PrimaryDeviceId = table.Column<int>(type: "int", nullable: false),
+                    PrimaryDeviceState = table.Column<bool>(type: "bit", nullable: false),
+                    PrimaryDeviceValue = table.Column<double>(type: "float", nullable: false),
+                    SecondaryDeviceId = table.Column<int>(type: "int", nullable: false),
+                    SecondaryDeviceState = table.Column<bool>(type: "bit", nullable: false),
+                    SecondaryDeviceValue = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {

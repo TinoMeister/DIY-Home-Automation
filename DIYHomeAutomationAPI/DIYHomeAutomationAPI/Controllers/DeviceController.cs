@@ -144,8 +144,8 @@ namespace DIYHomeAutomationAPI.Controllers
                     _context.Notifications.RemoveRange(notifications);
 
                     // Delete from Restrictions
-                    var restrictions = _context.Restrictions.Where(r => r.PrimarySensorId.Equals(device.Id) || 
-                    r.SecondarySensorId.Equals(device.Id)).ToList();
+                    var restrictions = _context.Restrictions.Where(r => r.PrimaryDeviceId.Equals(device.Id) ||
+                    r.SecondaryDeviceId.Equals(device.Id)).ToList();
                     _context.Restrictions.RemoveRange(restrictions);
 
                     // Delete from Histories
