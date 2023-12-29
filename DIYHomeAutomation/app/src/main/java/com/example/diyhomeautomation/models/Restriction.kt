@@ -5,10 +5,10 @@ data class Restriction(
     var name: String,
     var state: GeneralState,
     var condition: TypeCondition,
-    var primarySensorId: Int,
-    var primarySensorState: GeneralState,
-    var primarySensorValue: Double,
-    var secondarySensorId: Int,
-    var secondarySensorState: GeneralState,
-    var secondarySensorValue: Double?
+    var primaryDeviceId: Int,
+    var primaryDeviceState: GeneralState,
+    var primaryDeviceValue: Double,
+    var secondaryDeviceId: Int,
+    var secondaryDeviceState: GeneralState,
+    var secondaryDeviceValue: Double?
 )

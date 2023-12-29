@@ -8,6 +8,6 @@ data class Device(
     var value: Double?,
     var icon: String?,
     var roomId: Int,
-    var typeSensorId: Int,
+    var typeDeviceId: Int,
     var taskDevices: List<TaskDevice>?
 )
