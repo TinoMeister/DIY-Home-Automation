@@ -4,17 +4,16 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.transition.ChangeBounds
+import android.util.Log
 import android.util.Pair
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.diyhomeautomation.api.ApiHelper
 import com.example.diyhomeautomation.api.UserApi
 import com.example.diyhomeautomation.models.AuthRequest
 import com.example.diyhomeautomation.models.AuthResponse
-import com.example.diyhomeautomation.models.User
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -61,8 +60,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnLogin.setOnClickListener {
-            val email = email.editText!!.text.toString()
-            val password = password.editText!!.text.toString()
+            val email = "test@gmail.com"//email.editText!!.text.toString()
+            val password = "test1234" //password.editText!!.text.toString()
 
             // launching a new coroutine
             GlobalScope.launch {
@@ -70,16 +69,17 @@ class LoginActivity : AppCompatActivity() {
 
                 result.enqueue(object: Callback<AuthResponse> {
                     override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
-                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                        intent.extras?.putString("token", response.body()?.token)
-                        intent.extras?.putString("userID", response.body()?.userID)
-                        startActivity(intent)
+                        if (response.isSuccessful) {
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            intent.putExtra("token", response.body()?.token)
+                            intent.putExtra("userID", response.body()?.userID)
+                            startActivity(intent)
+                        }
+                        else Log.e("LoginActivity", "API call unsuccessful. Code: ${response.code()}")
                     }
 
                     override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
-                        Toast.makeText(this@LoginActivity,
-                            "User/Password Wrong",
-                            Toast.LENGTH_LONG).show()
+                        Log.e("LoginActivity", "API call failed", t)
                     }
                 })
             }

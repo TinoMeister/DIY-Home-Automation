@@ -1,6 +1,6 @@
 /* Create Database */
--- CREATE DATABASE sensorDb;
-/*
+ CREATE DATABASE sensorDb;
+
 -- Tabela para a entidade User
 CREATE TABLE Users (
     Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -94,9 +94,7 @@ CREATE TABLE TaskDevices (
     FOREIGN KEY (TaskId) REFERENCES Tasks(Id),
     FOREIGN KEY (DeviceId) REFERENCES Devices(Id)
 );
-*/	
 
-/*
 INSERT INTO TypeDevices (Name) VALUES ('Led');
 INSERT INTO TypeDevices (Name) VALUES ('Sensor Light');
 INSERT INTO TypeDevices (Name) VALUES ('Temperature & Humidity');
@@ -118,9 +116,8 @@ VALUES ('test', 0, 0, 2, 0, 0, NULL, NULL, NULL);
 
 INSERT INTO Restrictions (Name, State, Condition, PrimarySensorId, PrimarySensorState, PrimarySensorValue, SecondarySensorId, SecondarySensorState, SecondarySensorValue) 
 VALUES ('test2', 0, 0, 2, 0, 0, NULL, NULL, NULL);
-*/
 
-/*
+
 select * from AspNetUsers
 
 select * from TypeDevices
@@ -138,4 +135,3 @@ select * from Restrictions
 select * from Rooms
 select * from Devices
 select * from Notifications
-*/

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tiago\\Code\\School\\DIY-Home-Automation\\DIYHomeAutomationAPI\\DIYHomeAutomationAPI\\DIYHomeAutomationAPI.csproj": {}
+    "C:\\Users\\arant\\Desktop\\LESI\\3-1\\PA\\DIY-Home-Automation\\DIYHomeAutomationAPI\\DIYHomeAutomationAPI\\DIYHomeAutomationAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tiago\\Code\\School\\DIY-Home-Automation\\DIYHomeAutomationAPI\\DIYHomeAutomationAPI\\DIYHomeAutomationAPI.csproj": {
+    "C:\\Users\\arant\\Desktop\\LESI\\3-1\\PA\\DIY-Home-Automation\\DIYHomeAutomationAPI\\DIYHomeAutomationAPI\\DIYHomeAutomationAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tiago\\Code\\School\\DIY-Home-Automation\\DIYHomeAutomationAPI\\DIYHomeAutomationAPI\\DIYHomeAutomationAPI.csproj",
+        "projectUniqueName": "C:\\Users\\arant\\Desktop\\LESI\\3-1\\PA\\DIY-Home-Automation\\DIYHomeAutomationAPI\\DIYHomeAutomationAPI\\DIYHomeAutomationAPI.csproj",
         "projectName": "DIYHomeAutomationAPI",
-        "projectPath": "C:\\Users\\tiago\\Code\\School\\DIY-Home-Automation\\DIYHomeAutomationAPI\\DIYHomeAutomationAPI\\DIYHomeAutomationAPI.csproj",
-        "packagesPath": "C:\\Users\\tiago\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tiago\\Code\\School\\DIY-Home-Automation\\DIYHomeAutomationAPI\\DIYHomeAutomationAPI\\obj\\",
+        "projectPath": "C:\\Users\\arant\\Desktop\\LESI\\3-1\\PA\\DIY-Home-Automation\\DIYHomeAutomationAPI\\DIYHomeAutomationAPI\\DIYHomeAutomationAPI.csproj",
+        "packagesPath": "C:\\Users\\arant\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\arant\\Desktop\\LESI\\3-1\\PA\\DIY-Home-Automation\\DIYHomeAutomationAPI\\DIYHomeAutomationAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\tiago\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\arant\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\tiago\\Code\\GEHealthcare\\helper": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
