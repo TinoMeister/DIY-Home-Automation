@@ -27,7 +27,7 @@ namespace DIYHomeAutomationAPI.Controllers
             return await (
                 from r in _context.Rooms
                 join d in _context.Devices on r.Id equals d.RoomId
-                join re in _context.Restrictions on d.Id equals re.PrimarySensorId
+                join re in _context.Restrictions on d.Id equals re.PrimaryDeviceId
                 where r.UserId == userId
                 select re
             ).ToListAsync();
@@ -46,7 +46,7 @@ namespace DIYHomeAutomationAPI.Controllers
                 from e in _context.Esps
                 join r in _context.Rooms on e.Id equals r.EspId
                 join d in _context.Devices on r.Id equals d.RoomId
-                join re in _context.Restrictions on d.Id equals re.PrimarySensorId
+                join re in _context.Restrictions on d.Id equals re.PrimaryDeviceId
                 where e.Name == espName
                 select re
             ).ToListAsync();
@@ -69,12 +69,12 @@ namespace DIYHomeAutomationAPI.Controllers
                 r.Condition.Equals(restriction.Condition) &&
                 r.Name.Equals(restriction.Name) &&
                 r.State.Equals(restriction.State) &&
-                r.PrimarySensorId.Equals(restriction.PrimarySensorId) &&
-                r.PrimarySensorState.Equals(restriction.PrimarySensorState) &&
-                r.PrimarySensorValue.Equals(restriction.PrimarySensorValue) &&
-                r.SecondarySensorId.Equals(restriction.SecondarySensorId) &&
-                r.SecondarySensorValue.Equals(restriction.SecondarySensorValue) && 
-                r.SecondarySensorState.Equals(restriction.SecondarySensorState)
+                r.PrimaryDeviceId.Equals(restriction.PrimaryDeviceId) &&
+                r.PrimaryDeviceState.Equals(restriction.PrimaryDeviceState) &&
+                r.PrimaryDeviceValue.Equals(restriction.PrimaryDeviceValue) &&
+                r.SecondaryDeviceId.Equals(restriction.SecondaryDeviceId) &&
+                r.SecondaryDeviceValue.Equals(restriction.SecondaryDeviceValue) && 
+                r.SecondaryDeviceState.Equals(restriction.SecondaryDeviceState)
                 ).FirstOrDefaultAsync() is not null)
                 return BadRequest();
 
@@ -106,12 +106,12 @@ namespace DIYHomeAutomationAPI.Controllers
                 r.Condition.Equals(restriction.Condition) &&
                 r.Name.Equals(restriction.Name) &&
                 r.State.Equals(restriction.State) &&
-                r.PrimarySensorId.Equals(restriction.PrimarySensorId) &&
-                r.PrimarySensorState.Equals(restriction.PrimarySensorState) &&
-                r.PrimarySensorValue.Equals(restriction.PrimarySensorValue) &&
-                r.SecondarySensorId.Equals(restriction.SecondarySensorId) &&
-                r.SecondarySensorValue.Equals(restriction.SecondarySensorValue) &&
-                r.SecondarySensorState.Equals(restriction.SecondarySensorState)
+                r.PrimaryDeviceId.Equals(restriction.PrimaryDeviceId) &&
+                r.PrimaryDeviceState.Equals(restriction.PrimaryDeviceState) &&
+                r.PrimaryDeviceValue.Equals(restriction.PrimaryDeviceValue) &&
+                r.SecondaryDeviceId.Equals(restriction.SecondaryDeviceId) &&
+                r.SecondaryDeviceValue.Equals(restriction.SecondaryDeviceValue) &&
+                r.SecondaryDeviceState.Equals(restriction.SecondaryDeviceState)
                 ).FirstOrDefaultAsync() is not null)
                 return BadRequest();
 

@@ -33,7 +33,7 @@ namespace DIYHomeAutomationAPI.Models
         public TimeSpan EndHour { get; set; }
 
         /// <summary>
-        /// Task's Days of Weelks
+        /// Task's Days of Weeks
         /// </summary>
         public string DaysWeek { get; set; } = null!;
 

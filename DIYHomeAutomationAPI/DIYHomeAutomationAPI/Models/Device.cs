@@ -45,7 +45,7 @@ namespace DIYHomeAutomationAPI.Models
         /// <summary>
         /// Device's Type Id
         /// </summary>
-        public int TypeSensorId { get; set; }
+        public int TypeDeviceId { get; set; }
 
         /// <summary>
         /// List of TaskDevice's

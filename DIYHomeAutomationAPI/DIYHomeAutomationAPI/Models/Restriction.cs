@@ -29,33 +29,33 @@ namespace DIYHomeAutomationAPI.Models
         public TypeCondition Condition { get; set; }
 
         /// <summary>
-        /// Primary Sensor's Id
+        /// Primary Device's Id
         /// </summary>
-        public int PrimarySensorId { get; set; }
+        public int PrimaryDeviceId { get; set; }
 
         /// <summary>
-        /// Primary Sensor's State
+        /// Primary Device's State
         /// </summary>
-        public bool PrimarySensorState { get; set; }
+        public bool PrimaryDeviceState { get; set; }
 
         /// <summary>
-        /// Primary Sensor's Value
+        /// Primary Device's Value
         /// </summary>
-        public double PrimarySensorValue { get; set; }
+        public double PrimaryDeviceValue { get; set; }
 
         /// <summary>
-        /// Secondary Sensor's Id
+        /// Secondary Device's Id
         /// </summary>
-        public int? SecondarySensorId { get; set; }
+        public int? SecondaryDeviceId { get; set; }
 
         /// <summary>
-        /// Secondary Sensor's State
+        /// Secondary Device's State
         /// </summary>
-        public bool? SecondarySensorState { get; set; }
+        public bool? SecondaryDeviceState { get; set; }
 
         /// <summary>
-        /// Secondary Sensor's Value
+        /// Secondary Device's Value
         /// </summary>
-        public double? SecondarySensorValue { get; set; }
+        public double? SecondaryDeviceValue { get; set; }
     }
 }

@@ -116,7 +116,7 @@ namespace DIYHomeAutomationAPI.Migrations
                     b.Property<bool>("State")
                         .HasColumnType("bit");
 
-                    b.Property<int>("TypeSensorId")
+                    b.Property<int>("TypeDeviceId")
                         .HasColumnType("int");
 
                     b.Property<double?>("Value")
@@ -214,22 +214,22 @@ namespace DIYHomeAutomationAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PrimarySensorId")
+                    b.Property<int>("PrimaryDeviceId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("PrimarySensorState")
+                    b.Property<bool>("PrimaryDeviceState")
                         .HasColumnType("bit");
 
-                    b.Property<double>("PrimarySensorValue")
+                    b.Property<double>("PrimaryDeviceValue")
                         .HasColumnType("float");
 
-                    b.Property<int>("SecondarySensorId")
+                    b.Property<int>("SecondaryDeviceId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("SecondarySensorState")
+                    b.Property<bool>("SecondaryDeviceState")
                         .HasColumnType("bit");
 
-                    b.Property<double?>("SecondarySensorValue")
+                    b.Property<double?>("SecondaryDeviceValue")
                         .HasColumnType("float");
 
                     b.Property<bool>("State")
