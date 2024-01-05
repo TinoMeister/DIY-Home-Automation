@@ -16,6 +16,7 @@
         android:textSize="15sp"/>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/room_name_til"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/name"
@@ -55,6 +56,7 @@
                 android:weightSum="4">
 
                 <ImageButton
+                    android:id="@+id/room_iconchair_btn"
                     android:contentDescription="@string/btn_chair_desc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -68,6 +70,7 @@
                     android:src="@drawable/ic_chair" />
 
                 <ImageButton
+                    android:id="@+id/room_iconbath_btn"
                     android:contentDescription="@string/btn_bath_desc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -81,6 +84,7 @@
                     android:src="@drawable/ic_bathtub"/>
 
                 <ImageButton
+                    android:id="@+id/room_iconbed_btn"
                     android:contentDescription="@string/btn_bed_desc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -94,6 +98,7 @@
                     android:src="@drawable/ic_bed"/>
 
                 <ImageButton
+                    android:id="@+id/room_icontv_btn"
                     android:contentDescription="@string/btn_tv_desc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -114,6 +119,7 @@
                 android:weightSum="4">
 
                 <ImageButton
+                    android:id="@+id/room_iconkitchen_btn"
                     android:contentDescription="@string/btn_kitchen_desc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -127,6 +133,7 @@
                     android:src="@drawable/ic_kitchen"/>
 
                 <ImageButton
+                    android:id="@+id/room_icongarage_btn"
                     android:contentDescription="@string/btn_garage_desc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -140,6 +147,7 @@
                     android:src="@drawable/ic_garage"/>
 
                 <ImageButton
+                    android:id="@+id/room_iconother_btn"
                     android:contentDescription="@string/btn_other_desc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -151,7 +159,6 @@
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:src="@drawable/ic_other_house"/>
-
             </LinearLayout>
 
         </LinearLayout>
@@ -159,6 +166,7 @@
     </androidx.cardview.widget.CardView>
 
     <Button
+        android:id="@+id/room_create_btn"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"

@@ -13,16 +13,16 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RoomApi {
-    @GET("/Room")
+    @GET("Room")
     fun getAllRooms(@Header("Authorization") token: String,
                     @Query("userId") userId: String): Call<List<Room>>
+    @POST("Room")
+    fun postRoom(@Header("Authorization") token: String,
+                 @Body value: Room): Call<Room>
 
-    @POST("/rooms")
-    fun postRoom(@Body value: Room): Call<Room>
-
-    @PUT("/rooms/{id}")
+    @PUT("Room/{id}")
     fun putRoom(@Path("id") id: Int, @Body value: Room): Call<Room>
 
-    @DELETE("/rooms/{id}")
+    @DELETE("Room/{id}")
     fun deleteRoom(@Path("id") id: Int): Call<Any>
 }

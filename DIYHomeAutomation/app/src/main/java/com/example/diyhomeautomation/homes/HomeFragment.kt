@@ -1,7 +1,9 @@
 package com.example.diyhomeautomation.homes
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,6 +35,10 @@ class HomeFragment : Fragment() {
 
     private lateinit var myView: View
     private lateinit var myActivity: FragmentActivity
+    private lateinit var userId: String
+    private lateinit var token: String
+    private var roomsList: List<Room> = emptyList()
+
     private val lst: GridView by lazy {
         myView.findViewById(R.id.home_fr_gv)
     }
@@ -58,12 +64,9 @@ class HomeFragment : Fragment() {
         myActivity.findViewById(R.id.main_action2_btn)
     }
 
-    private lateinit var userId: String
-    private lateinit var token: String
-    private lateinit var roomsList: List<Room>
-
-    val testValues = listOf<String>("AA","BB","CC","DD","EE","FF","GG","HH","II","JJ","KK","LL",
-        "MM","NN","OO","PP","QQ","RR","SS","TT","UU","VV")
+    companion object {
+        const val CREATE_ROOM_REQUEST_CODE = 1001 // Use your own request code
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,8 +75,11 @@ class HomeFragment : Fragment() {
 
         myActivity = this.requireActivity()
 
-        userId = myActivity.intent.extras?.getString("userId")!!
-        token = myActivity.intent.extras?.getString("token")!!
+        userId = arguments?.getString("userId") ?: return
+        token = arguments?.getString("token") ?: return
+
+        Log.d("HomeFragment", "Token: $token")
+        Log.d("HomeFragment", "UserID: $userId")
 
         layoutTop.visibility = View.VISIBLE
         mainText.text = getString(R.string.home_fg_mainText)
@@ -81,6 +87,8 @@ class HomeFragment : Fragment() {
 
         addBtn.setOnClickListener {
             val intent = Intent(this.activity, RoomCUActivity::class.java)
+            intent.putExtra("userId", userId)
+            intent.putExtra("token", token)
             startActivity(intent)
         }
 
@@ -100,18 +108,19 @@ class HomeFragment : Fragment() {
 
         // launching a new coroutine
         GlobalScope.launch {
-            val result = apiHelper.getAllRooms(token, userId)
+            val result = apiHelper.getAllRooms("Bearer $token", userId)
 
             result.enqueue(object: Callback<List<Room>> {
                 override fun onResponse(call: Call<List<Room>>, response: Response<List<Room>>) {
-                    roomsList = response.body()!!
-                    updateListView(R.layout.custom_home_rooms_cardview)
+                    if(response.isSuccessful){
+                        roomsList = response.body()?: emptyList()
+                        updateListView(R.layout.custom_home_rooms_cardview)
+                    }
+                    else Log.e("HomeFragment", "API call unsuccessful. Code: ${response.code()}")
                 }
 
                 override fun onFailure(call: Call<List<Room>>, t: Throwable) {
-                    Toast.makeText(myActivity,
-                        "Something went wrong",
-                        Toast.LENGTH_LONG).show()
+                    Log.e("HomeFragment", "API call failed", t)
                 }
             })
         }
