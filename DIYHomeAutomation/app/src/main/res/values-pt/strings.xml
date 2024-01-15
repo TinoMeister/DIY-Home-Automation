@@ -29,4 +29,11 @@
     <string name="create_your_routine_schedule">Crie a suas rotinas</string>
     <string name="all_day">Todos dias</string>
     <string name="today">Hoje</string>
+    <string name="Delete">Delete</string>
+    <string name="Edit">Edit</string>
+    <string name="PinValue">Pin Value\n</string>
+    <string name="deviceAdd_device_state">Enter device state</string>
+    <string name="deviceAdd_device_pinvalue">Enter device pin value</string>
+    <string name="deviceAdd_device_value">Enter device value</string>
+    <string name="Value">Value</string>
 </resources>

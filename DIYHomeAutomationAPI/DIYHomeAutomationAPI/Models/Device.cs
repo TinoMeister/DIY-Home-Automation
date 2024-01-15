@@ -10,7 +10,7 @@ namespace DIYHomeAutomationAPI.Models
         /// <summary>
         /// Device's Id
         /// </summary>
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         /// <summary>
         /// Device's Name
@@ -20,12 +20,12 @@ namespace DIYHomeAutomationAPI.Models
         /// <summary>
         /// Device's PinValue
         /// </summary>
-        public string PinValue { get; set; } = null!;
+        public string? PinValue { get; set; } = null!;
 
         /// <summary>
         /// Device's State
         /// </summary>
-        public bool State { get; set; }
+        public bool? State { get; set; }
 
         /// <summary>
         /// Device's Value
@@ -40,12 +40,12 @@ namespace DIYHomeAutomationAPI.Models
         /// <summary>
         /// Room's Id
         /// </summary>
-        public int RoomId { get; set; }
+        public int? RoomId { get; set; }
 
         /// <summary>
         /// Device's Type Id
         /// </summary>
-        public int TypeDeviceId { get; set; }
+        public int? TypeDeviceId { get; set; }
 
         /// <summary>
         /// List of TaskDevice's

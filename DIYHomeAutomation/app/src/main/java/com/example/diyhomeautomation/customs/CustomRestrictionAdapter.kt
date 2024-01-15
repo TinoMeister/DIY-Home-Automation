@@ -9,6 +9,13 @@ import android.widget.Switch
 import android.widget.TextView
 import com.example.diyhomeautomation.R
 
+/**
+ * Custom adapter for displaying a list of restrictions in the app.
+ *
+ * @param context The context of the application.
+ * @param resource The layout resource ID for each item in the list.
+ * @param objects The list of restrictions to be displayed.
+ */
 class CustomRestrictionAdapter(context: Context, resource: Int, objects: MutableList<String>) :
     ArrayAdapter<String>(context, resource, objects) {
 
@@ -16,7 +23,10 @@ class CustomRestrictionAdapter(context: Context, resource: Int, objects: Mutable
     private var mValues: MutableList<String>
     private var mResource: Int
 
-    var onItemClick : ((String) -> Unit)? = null
+    /**
+     * Callback function to be invoked when an item is clicked.
+     */
+    var onItemClick: ((String) -> Unit)? = null
 
     init {
         mContext = context
@@ -24,14 +34,20 @@ class CustomRestrictionAdapter(context: Context, resource: Int, objects: Mutable
         mResource = resource
     }
 
-
+    /**
+     * Overrides the default getView method to customize the appearance of each item in the list.
+     *
+     * @param position The position of the item in the list.
+     * @param convertView The recycled view to populate.
+     * @param parent The parent view.
+     * @return The custom view for the item at the specified position.
+     */
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view: View
 
         if (convertView != null) {
             view = convertView
-        }
-        else {
+        } else {
             view = LayoutInflater.from(mContext).inflate(mResource, parent, false)
             view.tag = MyViewHolder(view)
         }
@@ -41,8 +57,8 @@ class CustomRestrictionAdapter(context: Context, resource: Int, objects: Mutable
 
         vh.title?.text = value
         vh.isActive?.isChecked = position % 2 == 1
-        //vh.body?.text = value.body
 
+        // Set a click listener for the item
         view.setOnClickListener {
             onItemClick?.invoke(value)
         }
@@ -50,7 +66,11 @@ class CustomRestrictionAdapter(context: Context, resource: Int, objects: Mutable
         return view
     }
 
-
+    /**
+     * ViewHolder pattern to improve ListView performance by recycling views.
+     *
+     * @param view The view to be held by the ViewHolder.
+     */
     private class MyViewHolder(view: View?) {
         val title = view?.findViewById<TextView>(R.id.cardRestriction_title_tv)
         val total = view?.findViewById<TextView>(R.id.cardRestriction_total_tv)
