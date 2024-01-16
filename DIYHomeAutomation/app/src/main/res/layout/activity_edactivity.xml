@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context=".restrictions.RestrictionCUActivity">
+    tools:context=".restrictions.RestrictionEDActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/add_restrictionbtn"
-        android:text="Add Device"/>
+        android:text="Update Device"/>
 
 
     <TextView
@@ -94,7 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/restriction_Device_Target"
-        android:text="Add Device"/>
+        android:text="Update Device"/>
 
 
 
@@ -102,12 +102,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/statebtn"
-        android:text="Save"/>
+        />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/save_Restrictionbtn"
-        android:text="Save"/>
+        android:id="@+id/update_Restrictionbtn"
+        android:text="Update"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/delete_Restrictionbtn"
+        android:text="Delete"/>
 
 </LinearLayout>
