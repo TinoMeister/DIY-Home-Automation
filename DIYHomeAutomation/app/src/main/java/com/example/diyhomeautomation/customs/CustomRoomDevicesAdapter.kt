@@ -73,13 +73,8 @@ class CustomRoomDevicesAdapter(private val objects: MutableList<Device>) :
             } catch (e: NumberFormatException) {
                 Log.e("", "", e)
             }
-        } else {
-            // Handle the case where icon is null or empty
-            // You may set a default image or take other actions
-            // For example, set a default image resource:
         }
 
-        // Set a click listener for the item
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(obj)
         }

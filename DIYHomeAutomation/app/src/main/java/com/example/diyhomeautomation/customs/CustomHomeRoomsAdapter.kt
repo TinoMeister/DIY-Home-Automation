@@ -61,12 +61,7 @@ class CustomHomeRoomsAdapter(context: Context, resource: Int, objects: MutableLi
                 Log.e("", "", e)
             }
         } else {
-            // Handle the case where icon is null or empty
-            // You may set a default image or take other actions
-            // For example, set a default image resource:
-            // vh.img?.setImageResource(R.drawable.default_room_icon)
         }
-        // vh.total?.text = value.userId
 
         return view
     }

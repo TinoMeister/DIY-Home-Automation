@@ -36,6 +36,18 @@ interface DeviceApi {
     fun getDevice(@Header("Authorization") token: String,
                   @Path("roomId") roomId: Int): Call<List<Device>>
 
+
+    /**
+     * Retrieves a list of enabled devices for the specified user.
+     *
+     * @param token The authorization token to be included in the request header.
+     * @param userId The ID of the user for whom the list of enabled devices is requested.
+     * @return A Retrofit [Call] containing a list of [Device] objects as the response.
+     */
+    @GET("Device/Enabled/{userId}")
+    fun getDevicesEnabled(@Header("Authorization") token: String,
+                          @Path("userId") userId: String): Call<List<Device>>
+
     /**
      * Posts a new device.
      *

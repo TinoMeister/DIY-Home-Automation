@@ -1,6 +1,7 @@
 package com.example.diyhomeautomation.customs
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,7 +55,19 @@ class CustomHomeDevicesAdapter(context: Context, resource: Int, objects: Mutable
         val value = mValues[position]
 
         vh.title?.text = value.name
-        vh.isActive?.isChecked = position % 2 == 1
+        vh.isActive?.isChecked = value.state == true
+
+        if (!value.icon.isNullOrBlank()) {
+            try {
+                val resourceId = value.icon?.toIntOrNull()
+                if (resourceId != null && resourceId != 0) {
+                    vh.img?.setImageResource(resourceId)
+                }
+            } catch (e: NumberFormatException) {
+                Log.e("CustomDevicesAdapter", "Invalid icon format", e)
+            }
+        }
+        return view
         // vh.body?.text = value.body
 
         return view

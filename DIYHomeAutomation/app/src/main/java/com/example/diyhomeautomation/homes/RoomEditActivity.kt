@@ -21,8 +21,14 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.create
 
+/**
+ * Activity for editing details of a specific room.
+ *
+ * This activity allows users to modify the name and icon of a room, as well as delete the room.
+ */
 class RoomEditActivity: AppCompatActivity() {
 
+    // Properties for handling room data and user information
     private lateinit var roomDAO: RoomDAO
     private lateinit var userId: String
     private lateinit var token: String
@@ -30,6 +36,7 @@ class RoomEditActivity: AppCompatActivity() {
     private lateinit var roomName: String
     private var selectedButtonId: String = ""
 
+    // UI elements using lazy initialization
     private val name: TextInputLayout by lazy{
         findViewById(R.id.room_nameEdit_til)
     }
@@ -61,10 +68,16 @@ class RoomEditActivity: AppCompatActivity() {
         findViewById(R.id.room_delete_btn)
     }
 
+    /**
+     * Called when the activity is starting.
+     *
+     * Initializes UI elements, retrieves data from intents, and sets up click listeners.
+     */
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room_edit)
 
+        // Initialize API helper and retrieve intent data
         val apiHelper = ApiHelper().getInstance().create(RoomApi::class.java)
         userId = intent.getStringExtra("userId") ?: return
         token = intent.getStringExtra("token") ?: return
@@ -97,12 +110,8 @@ class RoomEditActivity: AppCompatActivity() {
 
         editBtn.setOnClickListener {
             val roomNametb = name.editText!!.text.toString()
-            Log.e("Test", roomName)
             val icon = selectedButtonId
-            Log.e("Test", icon)
             val espId = 1
-            Log.e("Test", roomId)
-            Log.e("Test", userId)
             val roomIdSQLite = roomDAO.getSQLiteRoomIdByName(roomName)
             val roomUpdated = roomDAO.updateRoom(Room(roomIdSQLite, roomNametb,
                 icon, userId, espId))

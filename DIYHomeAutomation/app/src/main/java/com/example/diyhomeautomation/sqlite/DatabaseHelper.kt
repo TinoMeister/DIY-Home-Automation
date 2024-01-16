@@ -15,7 +15,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
 ) {
     companion object {
         const val DATABASE_NAME = "sensorDb"
-        const val VERSION = 18
+        const val VERSION = 20
 
         const val TABLENAME_AUTHREQUEST = "auth_request"
         const val AUTHREQUEST_EMAIL = "auth_email"

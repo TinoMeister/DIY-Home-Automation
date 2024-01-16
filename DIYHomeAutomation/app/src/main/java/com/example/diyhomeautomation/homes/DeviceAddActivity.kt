@@ -11,6 +11,7 @@ import com.example.diyhomeautomation.R
 import com.example.diyhomeautomation.api.ApiHelper
 import com.example.diyhomeautomation.api.DeviceApi
 import com.example.diyhomeautomation.models.Device
+import com.example.diyhomeautomation.sqlite.DeviceDAO
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -39,6 +40,7 @@ import retrofit2.Response
  */
 class DeviceAddActivity : AppCompatActivity() {
 
+    private lateinit var deviceDAO: DeviceDAO
     private lateinit var roomName: String
     private lateinit var roomId: String
     private lateinit var token: String
@@ -83,6 +85,7 @@ class DeviceAddActivity : AppCompatActivity() {
         roomName = intent.getStringExtra("roomName") ?: return
         roomId = intent.getStringExtra("roomId") ?: return
         token = intent.getStringExtra("token") ?: return
+        deviceDAO = DeviceDAO(this@DeviceAddActivity)
 
         Log.d("DeviceAddActivity", "RoomId: $roomId")
         Log.d("DeviceAddActivity", "RoomName: $roomName")
@@ -118,25 +121,36 @@ class DeviceAddActivity : AppCompatActivity() {
         addBtn.setOnClickListener {
             val name = deviceName.editText!!.text.toString()
             val icon = selectedButtonId
+            val deviceInserted = deviceDAO.insertDevice(Device(null, name, "",
+                false, 0.0, icon, roomId.toInt(), null, null))
 
-            GlobalScope.launch{
-                val result = apiHelper.postDevice("Bearer $token", Device(null, name,
-                    "",false,0.0, icon, roomId.toInt(),
-                    null, null)
-                )
-                result.enqueue(object: Callback<Device> {
-                    override fun onResponse(call: Call<Device>, response: Response<Device>){
-                        if(response.isSuccessful){
-                            finish()
+            if(deviceInserted) {
+                // Use GlobalScope to launch a coroutine for handling API calls
+                GlobalScope.launch {
+                    val result = apiHelper.postDevice(
+                        "Bearer $token", Device(
+                            null, name,
+                            "", false, 0.0, icon, roomId.toInt(),
+                            null, null
+                        )
+                    )
+                    result.enqueue(object : Callback<Device> {
+                        override fun onResponse(call: Call<Device>, response: Response<Device>) {
+                            if (response.isSuccessful) {
+                                finish()
+                            } else Log.e(
+                                "DeviceAddActivity", "API call unsuccessful." +
+                                        "Code: ${response.code()}"
+                            )
                         }
-                        else Log.e("DeviceAddActivity", "API call unsuccessful." +
-                                "Code: ${response.code()}")
-                    }
-                    override fun onFailure(call: Call<Device>, t: Throwable) {
-                        Log.e("DeviceAddActivity", "API call failed", t)
-                    }
-                })
-
+                        override fun onFailure(call: Call<Device>, t: Throwable) {
+                            Log.e("DeviceAddActivity", "API call failed", t)
+                        }
+                    })
+                }
+            } else {
+                // Failed to insert into SQLite
+                Log.e("DeviceAddActivity", "Failed to insert device into SQLite")
             }
         }
     }

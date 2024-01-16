@@ -33,8 +33,8 @@ class DeviceDAO(context: Context) : IDevice {
         contents.put(DatabaseHelper.DEVICE_VALUE, device.value)
         contents.put(DatabaseHelper.DEVICE_ICON, device.icon)
         contents.put(DatabaseHelper.DEVICE_ROOMID, device.roomId)
-        //contents.put(DatabaseHelper.DEVICE_TYPEDEVICEID, device.typeDeviceId)
-        //contents.put(DatabaseHelper.DEVICE_TASKDEVICES, device.taskDevices)
+        contents.put(DatabaseHelper.DEVICE_TYPEDEVICEID, device.typeDeviceId)
+        contents.put(DatabaseHelper.DEVICE_TASKDEVICES, device.taskDevices.toString())
 
         try {
             write.insert(
@@ -148,4 +148,81 @@ class DeviceDAO(context: Context) : IDevice {
 
         return true
     }
+
+    fun getSQLiteDeviceIdByName(deviceName: String): Int {
+        val args = arrayOf(deviceName)
+
+        val cursor = read.query(
+            DatabaseHelper.TABLENAME_DEVICE,
+            arrayOf(DatabaseHelper.DEVICE_ID),
+            "${DatabaseHelper.DEVICE_NAME} = ?",
+            args,
+            null, null, null
+        )
+
+        return if (cursor.moveToFirst()) {
+            val columnIndex = cursor.getColumnIndex(DatabaseHelper.DEVICE_ID)
+            val sqliteDeviceId = cursor.getInt(columnIndex)
+
+            Log.d("DeviceDAO", "Device Name: $deviceName, SQLite Room ID: $sqliteDeviceId")
+
+            if (columnIndex != -1) {
+                sqliteDeviceId
+            } else {
+                Log.w("DeviceDAO", "Column index for DEVICE_ID not found in the cursor")
+                -1
+            }
+        } else {
+            Log.w("DeviceDAO", "No matching device found for Device Name: $deviceName")
+            -1
+        }
+    }
+
+    /**
+     * Retrieves a list of devices associated with a specific room from the SQLite database.
+     *
+     * @param roomId The ID of the room for which devices are to be retrieved.
+     * @return A mutable list of [Device] objects associated with the specified room.
+     */
+    fun getAllDevicesByRoom(roomId: Int): MutableList<Device> {
+        val gson = Gson()
+        val listDevices = mutableListOf<Device>()
+
+        // SQL query to select devices belonging to the specified room
+        val sql = "SELECT * FROM ${DatabaseHelper.TABLENAME_DEVICE}" +
+                " WHERE ${DatabaseHelper.DEVICE_ROOMID} = ?"
+
+        // Execute the query with the room ID as a parameter
+        val cursor = read.rawQuery(sql, arrayOf(roomId.toString()))
+
+        // Column indices in the cursor
+        val indexDeviceId = cursor.getColumnIndex(DatabaseHelper.DEVICE_ID)
+        val indexDeviceName = cursor.getColumnIndex(DatabaseHelper.DEVICE_NAME)
+        val indexDevicePinValue = cursor.getColumnIndex(DatabaseHelper.DEVICE_PINVALUE)
+        val indexDeviceState = cursor.getColumnIndex(DatabaseHelper.DEVICE_STATE)
+        val indexDeviceValue = cursor.getColumnIndex(DatabaseHelper.DEVICE_VALUE)
+        val indexDeviceIcon = cursor.getColumnIndex(DatabaseHelper.DEVICE_ICON)
+        val indexDeviceRoomId = cursor.getColumnIndex(DatabaseHelper.DEVICE_ROOMID)
+
+        // Iterate through the cursor to create Device objects and add them to the list
+        while (cursor.moveToNext()) {
+            val deviceId = cursor.getInt(indexDeviceId)
+            val deviceName = cursor.getString(indexDeviceName)
+            val devicePinValue = cursor.getString(indexDevicePinValue)
+            val deviceState = cursor.getInt(indexDeviceState) == 1
+            val deviceValue = cursor.getDoubleOrNull(indexDeviceValue)
+            val deviceIcon = cursor.getStringOrNull(indexDeviceIcon)
+            val deviceRoomId = cursor.getInt(indexDeviceRoomId)
+
+            listDevices.add(
+                Device(
+                    deviceId, deviceName, devicePinValue, deviceState, deviceValue,
+                    deviceIcon, deviceRoomId, null, null
+                )
+            )
+        }
+        cursor.close()
+        return listDevices
+    }
+
 }

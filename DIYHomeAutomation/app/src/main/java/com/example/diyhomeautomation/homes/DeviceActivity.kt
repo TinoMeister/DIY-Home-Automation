@@ -53,6 +53,7 @@ class DeviceActivity : AppCompatActivity() {
         Log.d("DeviceActivity", "UserID: $userId")
         Log.d("DeviceEditActivity", "RoomId: $roomId")
 
+        // Use GlobalScope to launch a coroutine for handling API calls
         GlobalScope.launch {
             deviceList = mutableListOf()
 

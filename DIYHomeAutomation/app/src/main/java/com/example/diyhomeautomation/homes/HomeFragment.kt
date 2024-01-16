@@ -33,6 +33,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * A [Fragment] representing the home screen of the application.
+ *
+ * This fragment displays a GridView of rooms or devices based on user interaction and provides
+ * actions and navigation options.
+ */
 class HomeFragment : Fragment() {
 
     private lateinit var myView: View
@@ -141,7 +147,7 @@ class HomeFragment : Fragment() {
         // launching a new coroutine
         GlobalScope.launch {
             if (isNetworkAvailable()) {
-                val resultD = apiHelperDevice.getAllDevices("Bearer $token", userId)
+                val resultD = apiHelperDevice.getDevicesEnabled("Bearer $token", userId)
                 resultD.enqueue(object : Callback<List<Device>> {
                     override fun onResponse(
                         call: Call<List<Device>>,
@@ -235,22 +241,34 @@ class HomeFragment : Fragment() {
     }
 
 
+    /**
+     * Updates the [ListView] with data based on the specified layout.
+     *
+     * If the data lists (roomsList and deviceList) are not initialized, it initializes them by
+     * retrieving data from the corresponding DAOs (Data Access Objects).
+     *
+     * @param layout The layout resource ID to be used for creating the adapter.
+     *               Should be either [R.layout.custom_home_rooms_cardview] or
+     *               [R.layout.custom_home_devices_cardview].
+     */
     private fun updateListView(layout: Int) {
+        // Initialize data lists if not already initialized
         if (!::roomsList.isInitialized || !::deviceList.isInitialized) {
             roomsList = roomDAO.getAllRooms()
             deviceList = deviceDAO.getAllDevices()
         }
 
+        // Create an adapter based on the specified layout and data list
         val adapter = if (layout == R.layout.custom_home_rooms_cardview)
             CustomHomeRoomsAdapter(myView.context, layout, roomsList.toMutableList())
         else
             CustomHomeDevicesAdapter(myView.context, layout, deviceList.toMutableList())
 
+        // Set the adapter to the ListView
         lst.adapter = adapter
 
-        if (layout != R.layout.custom_home_rooms_cardview && layout !=
-            R.layout.custom_home_devices_cardview) return
-
+        // Set item click listener for rooms, navigating to RoomActivity with relevant data
+        if (layout != R.layout.custom_home_rooms_cardview && layout != R.layout.custom_home_devices_cardview) return
         lst.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
             val currentRoom = roomsList[position]
             val intent = Intent(this.activity, RoomActivity::class.java)
@@ -262,6 +280,14 @@ class HomeFragment : Fragment() {
         }
     }
 
+
+    /**
+     * Checks if the device has an active network connection.
+     *
+     * This function uses the [ConnectivityManager] to determine the network state.
+     *
+     * @return `true` if there is an active network connection, otherwise `false`.
+     */
     private fun isNetworkAvailable(): Boolean {
         val connectivityManager =
             myActivity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

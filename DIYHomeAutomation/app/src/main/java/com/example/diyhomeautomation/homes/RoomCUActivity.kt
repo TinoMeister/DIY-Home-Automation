@@ -100,7 +100,7 @@ class RoomCUActivity : AppCompatActivity() {
 
         // Set up click listener for the 'Create' button
         addBtn.setOnClickListener {
-            val id = 0 //id.editText!!.text.toInt()
+            val id = 0
             val name = "test" //name.editText!!.text.toString()
             val iconId = selectedButtonId
             val espId = 1

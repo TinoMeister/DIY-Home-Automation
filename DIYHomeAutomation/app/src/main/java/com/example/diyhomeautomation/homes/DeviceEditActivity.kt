@@ -12,6 +12,7 @@ import com.example.diyhomeautomation.R
 import com.example.diyhomeautomation.api.ApiHelper
 import com.example.diyhomeautomation.api.DeviceApi
 import com.example.diyhomeautomation.models.Device
+import com.example.diyhomeautomation.sqlite.DeviceDAO
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -49,10 +50,12 @@ import retrofit2.Response
  */
 class DeviceEditActivity: AppCompatActivity() {
 
+    private lateinit var deviceDAO: DeviceDAO
     private lateinit var deviceId: String
     private lateinit var roomId: String
     private lateinit var roomName: String
     private lateinit var token: String
+    private lateinit var deviceName: String
     private var selectedButtonId: String = ""
     private var isDeviceOn: Boolean = false
     private lateinit var autoCompleteTextView: AutoCompleteTextView
@@ -109,6 +112,8 @@ class DeviceEditActivity: AppCompatActivity() {
         roomId = intent.getStringExtra("roomId") ?: return
         token = intent.getStringExtra("token") ?: return
         deviceId = intent.getStringExtra("deviceId") ?: return
+        deviceName = intent.getStringExtra("deviceName") ?: return
+        deviceDAO = DeviceDAO(this@DeviceEditActivity)
 
         Log.d("DeviceEditActivity", "Token: $token")
         Log.d("DeviceEditActivity", "DeviceId: $deviceId")
@@ -144,7 +149,6 @@ class DeviceEditActivity: AppCompatActivity() {
 
         isDeviceOn = state.isChecked
         state.setOnCheckedChangeListener { buttonView, isChecked ->
-            // Update the state when ToggleButton state changes
             isDeviceOn = isChecked
         }
 
@@ -155,48 +159,63 @@ class DeviceEditActivity: AppCompatActivity() {
             val state = isDeviceOn
             val value = valueEdit.editText!!.text.toString()
 
-            Log.d("DeviceEditActivity", "name: $name")
-            Log.d("DeviceEditActivity", "icon: $icon")
-            Log.d("DeviceEditActivity", "pinValue: $pinValue")
-            Log.d("DeviceEditActivity", "state: $state")
-            Log.d("DeviceEditActivity", "value: $value")
+            val deviceIdSqlite = deviceDAO.getSQLiteDeviceIdByName(deviceName)
+            val deviceUpdated = deviceDAO.updateDevice(Device(deviceIdSqlite, name, pinValue,
+                state, value.toDoubleOrNull(), icon, roomId.toInt(), null, null))
 
-            GlobalScope.launch {
-                val result = apiHelper.putDevice("Bearer $token", deviceId.toInt(),
-                    Device(deviceId.toInt(), name, pinValue, state, value.toDoubleOrNull(),
-                        icon , roomId.toInt(), null, null))
-                result.enqueue(object: Callback<Void> {
-                    override fun onResponse(call: Call<Void>, response: Response<Void>){
-                        if(response.isSuccessful){
-                            finish()
+            if(deviceUpdated) {
+                // Use GlobalScope to launch a coroutine for handling API calls
+                GlobalScope.launch {
+                    val result = apiHelper.putDevice(
+                        "Bearer $token", deviceId.toInt(),
+                        Device(
+                            deviceId.toInt(), name, pinValue, state, value.toDoubleOrNull(),
+                            icon, roomId.toInt(), null, null
+                        )
+                    )
+                    result.enqueue(object : Callback<Void> {
+                        override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                            if (response.isSuccessful) {
+                                finish()
+                            } else Log.e(
+                                "DeviceEditActivity", "API call unsuccessful." +
+                                        "Code: ${response.code()}"
+                            )
                         }
-                        else Log.e("DeviceEditActivity", "API call unsuccessful." +
-                                "Code: ${response.code()}")
-                    }
-                    override fun onFailure(call: Call<Void>, t: Throwable) {
-                        Log.e("DeviceEditActivity", "API call failed", t)
-                    }
-                })
+
+                        override fun onFailure(call: Call<Void>, t: Throwable) {
+                            Log.e("DeviceEditActivity", "API call failed", t)
+                        }
+                    })
+                }
+            } else {
+                Log.e("DeviceEditActivity", "Failed to update device from SQLite")
             }
         }
 
         delete.setOnClickListener {
-            GlobalScope.launch {
-                val result = apiHelper.deleteDevice("Bearer $token", deviceId.toInt())
-                result.enqueue (object : Callback<Void> {
-                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                        if (response.isSuccessful) {
-                            finish()
-                        } else Log.e(
-                            "DeviceEditActivity", "API call unsuccessful." +
-                                    "Code: ${response.code()}"
-                        )
-                    }
-                    override fun onFailure(call: Call<Void>, t: Throwable) {
-                        Log.e("DeviceEditActivity", "API call failed", t)
-                    }
-                })
+            val deviceIdSqlite = deviceDAO.getSQLiteDeviceIdByName(deviceName)
+            val deviceRemoved = deviceDAO.removeDevice(deviceIdSqlite)
+            if(deviceRemoved) {
+                GlobalScope.launch {
+                    val result = apiHelper.deleteDevice("Bearer $token", deviceId.toInt())
+                    result.enqueue(object : Callback<Void> {
+                        override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                            if (response.isSuccessful) {
+                                finish()
+                            } else Log.e(
+                                "DeviceEditActivity", "API call unsuccessful." +
+                                        "Code: ${response.code()}"
+                            )
+                        }
 
+                        override fun onFailure(call: Call<Void>, t: Throwable) {
+                            Log.e("DeviceEditActivity", "API call failed", t)
+                        }
+                    })
+                }
+            } else {
+                Log.e("DeviceEditActivity", "Failed to remove device from SQLite")
             }
         }
 
