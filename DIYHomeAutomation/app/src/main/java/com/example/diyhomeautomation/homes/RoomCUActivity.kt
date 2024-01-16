@@ -118,7 +118,8 @@ class RoomCUActivity : AppCompatActivity() {
                                 // API call successful, finish the activity
                                 finish()
                             } else {
-                                Log.e("RoomCUActivity", "API call unsuccessful. Code: ${response.code()}")
+                                Log.e("RoomCUActivity", "API call unsuccessful." +
+                                        " Code: ${response.code()}")
                             }
                         }
 

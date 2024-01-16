@@ -29,6 +29,9 @@ class RoomActivity : AppCompatActivity() {
     private val addBtn: Button by lazy {
         findViewById(R.id.room_add_btn)
     }
+    private val editBtn: Button by lazy{
+        findViewById(R.id.edit_room_btn)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +57,15 @@ class RoomActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        editBtn.setOnClickListener {
+            val intent = Intent(this@RoomActivity, RoomEditActivity::class.java)
+            intent.putExtra("token", token)
+            intent.putExtra("userId", userId)
+            intent.putExtra("roomId", roomId)
+            intent.putExtra("roomName", roomName)
+            startActivity(intent)
+        }
+
         GlobalScope.launch {
             deviceList = mutableListOf()
             val resultD = apiHelper.getDevice("Bearer $token", roomId.toInt())
@@ -76,7 +88,6 @@ class RoomActivity : AppCompatActivity() {
                 }
             })
         }
-
     }
 
     /**

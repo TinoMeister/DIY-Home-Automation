@@ -42,6 +42,9 @@
             android:name=".homes.RoomActivity"
             android:exported="false" />
         <activity
+            android:name=".homes.RoomEditActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity

@@ -46,8 +46,9 @@ interface RoomApi {
      * @return A Retrofit Call containing the updated room.
      */
     @PUT("Room/{id}")
-    fun putRoom(@Path("id") id: Int,
-                @Body value: Room): Call<Room>
+    fun putRoom(@Header("Authorization") token: String,
+                @Path("id") id: Int,
+                @Body value: Room): Call<Void>
 
     /**
      * Deletes a room.
@@ -56,5 +57,6 @@ interface RoomApi {
      * @return A Retrofit Call with no specific type for the deletion result.
      */
     @DELETE("Room/{id}")
-    fun deleteRoom(@Path("id") id: Int): Call<Any>
+    fun deleteRoom(@Header("Authorization") token: String,
+                   @Path("id") id: Int): Call<Void>
 }

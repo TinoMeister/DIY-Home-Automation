@@ -2,6 +2,7 @@ package com.example.diyhomeautomation.sqlite
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.sqlite.SQLiteException
 import android.util.Log
 import androidx.core.database.getStringOrNull
 import com.example.diyhomeautomation.models.Room
@@ -72,4 +73,83 @@ class RoomDAO(context: Context) : IRoom {
         }
         return listRooms
     }
+
+    override fun removeRoom(roomId: Int): Boolean {
+        val args = arrayOf(roomId.toString())
+
+        try {
+            val rowsAffected = write.delete(
+                DatabaseHelper.TABLENAME_ROOM,
+                "${DatabaseHelper.ROOM_ID} = ?",
+                args
+            )
+            if (rowsAffected > 0) {
+                Log.i("RoomDAO", "Successfully removed room with ID: $roomId")
+                return true
+            } else {
+                Log.w("RoomDAO", "Room with ID $roomId not found")
+                return false
+            }
+        } catch (e: SQLiteException) {
+            Log.e("RoomDAO", "Error removing room with ID: $roomId", e)
+            return false
+        }
+    }
+
+    override fun updateRoom(room: Room): Boolean {
+        val args = arrayOf(room.id.toString())
+
+        val content = ContentValues()
+        content.put(DatabaseHelper.ROOM_NAME, room.name)
+        content.put(DatabaseHelper.ROOM_ICON, room.icon)
+
+        try {
+            val rowsAffected = write.update(
+                DatabaseHelper.TABLENAME_ROOM,
+                content,
+                "${DatabaseHelper.ROOM_ID} = ?",
+                args
+            )
+            if (rowsAffected > 0) {
+                Log.i("RoomDAO", "Successfully updated room with ID: ${room.id}")
+                return true
+            } else {
+                Log.w("RoomDAO", "Room with ID ${room.id} not found")
+                return false
+            }
+        } catch (e: SQLiteException) {
+            Log.e("RoomDAO", "Error updating room with ID: ${room.id}", e)
+            return false
+        }
+    }
+
+    fun getSQLiteRoomIdByName(roomName: String): Int {
+        val args = arrayOf(roomName)
+
+        val cursor = read.query(
+            DatabaseHelper.TABLENAME_ROOM,
+            arrayOf(DatabaseHelper.ROOM_ID),
+            "${DatabaseHelper.ROOM_NAME} = ?",
+            args,
+            null, null, null
+        )
+
+        return if (cursor.moveToFirst()) {
+            val columnIndex = cursor.getColumnIndex(DatabaseHelper.ROOM_ID)
+            val sqliteRoomId = cursor.getInt(columnIndex)
+
+            Log.d("RoomDAO", "Room Name: $roomName, SQLite Room ID: $sqliteRoomId")
+
+            if (columnIndex != -1) {
+                sqliteRoomId
+            } else {
+                Log.w("RoomDAO", "Column index for ROOM_ID not found in the cursor")
+                -1
+            }
+        } else {
+            Log.w("RoomDAO", "No matching room found for Room Name: $roomName")
+            -1
+        }
+    }
+
 }

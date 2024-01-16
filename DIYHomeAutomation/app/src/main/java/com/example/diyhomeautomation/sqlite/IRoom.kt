@@ -1,5 +1,6 @@
 package com.example.diyhomeautomation.sqlite
 
+import com.example.diyhomeautomation.models.Device
 import com.example.diyhomeautomation.models.Room
 
 /**
@@ -20,4 +21,8 @@ interface IRoom {
      * @return A list of rooms stored in the database.
      */
     fun getAllRooms(): List<Room>
+
+    fun removeRoom(roomId: Int): Boolean
+
+    fun updateRoom(room: Room): Boolean
 }

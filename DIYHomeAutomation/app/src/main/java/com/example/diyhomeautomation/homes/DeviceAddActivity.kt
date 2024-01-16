@@ -78,18 +78,11 @@ class DeviceAddActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_device_add)
-        Log.i("aqui", "aqui")
 
         val apiHelper = ApiHelper().getInstance().create(DeviceApi::class.java)
-        Log.i("aqui", "aqui")
-
         roomName = intent.getStringExtra("roomName") ?: return
-        Log.i("aqui", "aqui")
-
         roomId = intent.getStringExtra("roomId") ?: return
-        Log.i("aqui", "aqui")
         token = intent.getStringExtra("token") ?: return
-        Log.i("aqui", "aqui")
 
         Log.d("DeviceAddActivity", "RoomId: $roomId")
         Log.d("DeviceAddActivity", "RoomName: $roomName")
