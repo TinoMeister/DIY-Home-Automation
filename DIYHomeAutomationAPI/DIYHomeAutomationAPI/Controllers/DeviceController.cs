@@ -31,6 +31,20 @@ namespace DIYHomeAutomationAPI.Controllers
             ).ToListAsync();
 
         /// <summary>
+        /// This method search in the database all the Devices that are enabled.
+        /// </summary>
+        /// <param name="userId">User's Id</param>
+        /// <returns>List of devices</returns>
+        [HttpGet("Enabled/{userId}")]
+        public async Task<ActionResult<IEnumerable<Device>>> GetDevicesEnabled(string userId) =>
+            await (
+                from r in _context.Rooms
+                join d in _context.Devices on r.Id equals d.RoomId
+                where r.UserId == userId && d.State == true
+                select d
+            ).ToListAsync();
+
+        /// <summary>
         /// This method search in the database all the Devices with the same Room's id
         /// </summary>
         /// <param name="roomId">Room's Id</param>
