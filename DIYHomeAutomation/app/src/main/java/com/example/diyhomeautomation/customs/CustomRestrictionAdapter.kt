@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Switch
 import android.widget.TextView
 import com.example.diyhomeautomation.R
+import com.example.diyhomeautomation.models.Restriction
 
 /**
  * Custom adapter for displaying a list of restrictions in the app.
@@ -16,11 +17,15 @@ import com.example.diyhomeautomation.R
  * @param resource The layout resource ID for each item in the list.
  * @param objects The list of restrictions to be displayed.
  */
-class CustomRestrictionAdapter(context: Context, resource: Int, objects: MutableList<String>) :
-    ArrayAdapter<String>(context, resource, objects) {
+class CustomRestrictionAdapter(
+    context: Context,
+    resource: Int,
+    objects: MutableList<Restriction>
+) :
+    ArrayAdapter<Restriction>(context, resource, objects) {
 
     private var mContext: Context
-    private var mValues: MutableList<String>
+    private var mValues: MutableList<Restriction>
     private var mResource: Int
 
     /**
@@ -48,19 +53,22 @@ class CustomRestrictionAdapter(context: Context, resource: Int, objects: Mutable
         if (convertView != null) {
             view = convertView
         } else {
+            // If convertView is null, inflate the layout and create a new ViewHolder
             view = LayoutInflater.from(mContext).inflate(mResource, parent, false)
             view.tag = MyViewHolder(view)
         }
 
+        // Get the ViewHolder from the recycled view or the newly created view
         val vh: MyViewHolder = view.tag as MyViewHolder
         val value = mValues[position]
 
-        vh.title?.text = value
+        // Set data to the ViewHolder
+        vh.title?.text = value.name
         vh.isActive?.isChecked = position % 2 == 1
 
         // Set a click listener for the item
         view.setOnClickListener {
-            onItemClick?.invoke(value)
+            onItemClick?.invoke(value.name)
         }
 
         return view
