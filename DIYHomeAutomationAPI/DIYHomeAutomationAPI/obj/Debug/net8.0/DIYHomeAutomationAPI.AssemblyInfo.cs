@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DIYHomeAutomationAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+91e9681f3ae3e5e26db788e38d0afc6d93693449")]
 [assembly: System.Reflection.AssemblyProductAttribute("DIYHomeAutomationAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DIYHomeAutomationAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

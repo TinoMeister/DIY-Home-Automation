@@ -16,7 +16,7 @@
         android:textSize="15sp"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/deviceAdd_ddlst"
+        android:id="@+id/room_name_actv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/name"
@@ -39,6 +39,7 @@
         android:textSize="15sp"/>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/device_name_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/name"
@@ -78,6 +79,7 @@
                 android:weightSum="4">
 
                 <ImageButton
+                    android:id="@+id/device_chair_btn"
                     android:contentDescription="@string/btn_chair_desc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -91,6 +93,7 @@
                     android:src="@drawable/ic_chair" />
 
                 <ImageButton
+                    android:id="@+id/device_bath_btn"
                     android:contentDescription="@string/btn_bath_desc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -104,6 +107,7 @@
                     android:src="@drawable/ic_bathtub"/>
 
                 <ImageButton
+                    android:id="@+id/device_bed_btn"
                     android:contentDescription="@string/btn_bed_desc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -117,6 +121,7 @@
                     android:src="@drawable/ic_bed"/>
 
                 <ImageButton
+                    android:id="@+id/device_tv_btn"
                     android:contentDescription="@string/btn_tv_desc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -137,6 +142,7 @@
                 android:weightSum="4">
 
                 <ImageButton
+                    android:id="@+id/device_kitchen_btn"
                     android:contentDescription="@string/btn_kitchen_desc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -150,6 +156,7 @@
                     android:src="@drawable/ic_kitchen"/>
 
                 <ImageButton
+                    android:id="@+id/device_garage_btn"
                     android:contentDescription="@string/btn_garage_desc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -163,6 +170,7 @@
                     android:src="@drawable/ic_garage"/>
 
                 <ImageButton
+                    android:id="@+id/device_other_btn"
                     android:contentDescription="@string/btn_other_desc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -182,6 +190,7 @@
     </androidx.cardview.widget.CardView>
 
     <Button
+        android:id="@+id/device_add_btn"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"

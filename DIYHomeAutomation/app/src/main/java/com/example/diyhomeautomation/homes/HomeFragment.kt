@@ -1,7 +1,8 @@
 package com.example.diyhomeautomation.homes
 
-import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,15 +17,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.example.diyhomeautomation.MainActivity
 import com.example.diyhomeautomation.R
 import com.example.diyhomeautomation.api.ApiHelper
+import com.example.diyhomeautomation.api.DeviceApi
 import com.example.diyhomeautomation.api.RoomApi
-import com.example.diyhomeautomation.api.UserApi
 import com.example.diyhomeautomation.customs.CustomHomeDevicesAdapter
 import com.example.diyhomeautomation.customs.CustomHomeRoomsAdapter
-import com.example.diyhomeautomation.models.AuthResponse
+import com.example.diyhomeautomation.models.Device
 import com.example.diyhomeautomation.models.Room
+import com.example.diyhomeautomation.sqlite.DeviceDAO
+import com.example.diyhomeautomation.sqlite.RoomDAO
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -37,7 +39,12 @@ class HomeFragment : Fragment() {
     private lateinit var myActivity: FragmentActivity
     private lateinit var userId: String
     private lateinit var token: String
-    private var roomsList: List<Room> = emptyList()
+    private lateinit var roomsList: List<Room>
+    private lateinit var deviceList: List<Device>
+    private lateinit var existingRooms: List<Room>
+    private lateinit var existingDevices: List<Device>
+    private lateinit var roomDAO: RoomDAO
+    private lateinit var deviceDAO: DeviceDAO
 
     private val lst: GridView by lazy {
         myView.findViewById(R.id.home_fr_gv)
@@ -64,19 +71,19 @@ class HomeFragment : Fragment() {
         myActivity.findViewById(R.id.main_action2_btn)
     }
 
-    companion object {
-        const val CREATE_ROOM_REQUEST_CODE = 1001 // Use your own request code
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val apiHelper = ApiHelper().getInstance().create(RoomApi::class.java)
-
+        val apiHelperDevice = ApiHelper().getInstance().create(DeviceApi::class.java)
         myActivity = this.requireActivity()
+        roomDAO = RoomDAO(myActivity)
+        deviceDAO = DeviceDAO(myActivity)
 
         userId = arguments?.getString("userId") ?: return
         token = arguments?.getString("token") ?: return
+        existingRooms = roomDAO.getAllRooms()
+        existingDevices = deviceDAO.getAllDevices()
 
         Log.d("HomeFragment", "Token: $token")
         Log.d("HomeFragment", "UserID: $userId")
@@ -98,60 +105,167 @@ class HomeFragment : Fragment() {
 
         action1.text = getString(R.string.all_room)
         action1.setOnClickListener {
-            updateListView(R.layout.custom_home_rooms_cardview)
+            if (isNetworkAvailable()) {
+                updateListView(R.layout.custom_home_rooms_cardview)
+            } else{
+                myActivity.runOnUiThread {
+                    Toast.makeText(
+                        myActivity,
+                        "No network connection. Showing cached data...",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    roomsList = roomDAO.getAllRooms()
+                }
+                updateListView(R.layout.custom_home_rooms_cardview)
+            }
         }
 
         action2.text = getString(R.string.active_device)
         action2.setOnClickListener {
-            updateListView(R.layout.custom_home_devices_cardview)
-        }
+            if (isNetworkAvailable()) {
+                updateListView(R.layout.custom_home_devices_cardview)
+            } else {
+                myActivity.runOnUiThread {
+                    Toast.makeText(
+                        myActivity,
+                        "No network connection. Showing cached data...",
+                        Toast.LENGTH_LONG
+                    ).show()
 
+                    deviceList = deviceDAO.getAllDevices()
+                }
+                updateListView(R.layout.custom_home_devices_cardview)
+            }
+        }
         // launching a new coroutine
         GlobalScope.launch {
-            val result = apiHelper.getAllRooms("Bearer $token", userId)
-
-            result.enqueue(object: Callback<List<Room>> {
-                override fun onResponse(call: Call<List<Room>>, response: Response<List<Room>>) {
-                    if(response.isSuccessful){
-                        roomsList = response.body()?: emptyList()
-                        updateListView(R.layout.custom_home_rooms_cardview)
+            if (isNetworkAvailable()) {
+                val resultD = apiHelperDevice.getAllDevices("Bearer $token", userId)
+                resultD.enqueue(object : Callback<List<Device>> {
+                    override fun onResponse(
+                        call: Call<List<Device>>,
+                        response: Response<List<Device>>
+                    ) {
+                        if (response.isSuccessful) {
+                            deviceList = response.body() ?: emptyList()
+                            for(device in existingDevices){
+                                Log.i("", "$device")
+                            }
+                            for (device in deviceList) {
+                                if (existingDevices.contains(device)) {
+                                    return
+                                } else{
+                                    deviceDAO.insertDevice(device)
+                                }
+                            }
+                            updateListView(R.layout.custom_home_devices_cardview)
+                        } else Log.e(
+                            "HomeFragment-Active Device", "API call unsuccessful. " +
+                                    "Code: ${response.code()}"
+                        )
                     }
-                    else Log.e("HomeFragment", "API call unsuccessful. Code: ${response.code()}")
-                }
 
-                override fun onFailure(call: Call<List<Room>>, t: Throwable) {
-                    Log.e("HomeFragment", "API call failed", t)
+                    override fun onFailure(call: Call<List<Device>>, t: Throwable) {
+                        Log.e("HomeFragment-Active Device", "API call failed", t)
+                    }
+                })
+
+                val result = apiHelper.getAllRooms("Bearer $token", userId)
+                result.enqueue(object : Callback<List<Room>> {
+                    override fun onResponse(
+                        call: Call<List<Room>>,
+                        response: Response<List<Room>>
+                    ) {
+                        if (response.isSuccessful) {
+                            roomsList = response.body() ?: emptyList()
+
+                            for(room in existingRooms){
+                                Log.i("", "$room")
+                            }
+                            for (room in roomsList) {
+                                if (existingRooms.contains(room)) {
+                                    return
+                                }else{
+                                    roomDAO.insertRoom(room)
+                                }
+                            }
+                            updateListView(R.layout.custom_home_rooms_cardview)
+
+                        } else Log.e(
+                            "HomeFragment", "API call unsuccessful. " +
+                                    "Code: ${response.code()}"
+                        )
+                    }
+
+                    override fun onFailure(call: Call<List<Room>>, t: Throwable) {
+                        Log.e("HomeFragment", "API call failed", t)
+                    }
+                })
+            } else {
+                // Handle the case when there is no network connectivity
+                myActivity.runOnUiThread {
+                    Toast.makeText(
+                        myActivity,
+                        "No network connection. Showing cached data...",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    roomsList = existingRooms
+                    deviceList = existingDevices
+                    updateListView(R.layout.custom_home_rooms_cardview)
                 }
-            })
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?
     ): View {
-        myView = inflater.inflate(R.layout.fragment_home, container, false)
+        if (isNetworkAvailable()) {
+            myView = inflater.inflate(R.layout.fragment_home, container, false)
+            updateListView(R.layout.custom_home_rooms_cardview)
 
-        updateListView(R.layout.custom_home_rooms_cardview)
-
-        // Inflate the layout for this fragment
+        } else{
+            myView = inflater.inflate(R.layout.fragment_home, container, false)
+            roomsList = roomDAO.getAllRooms()
+            deviceList = deviceDAO.getAllDevices()
+        }
         return myView
     }
 
+
     private fun updateListView(layout: Int) {
+        if (!::roomsList.isInitialized || !::deviceList.isInitialized) {
+            roomsList = roomDAO.getAllRooms()
+            deviceList = deviceDAO.getAllDevices()
+        }
+
         val adapter = if (layout == R.layout.custom_home_rooms_cardview)
             CustomHomeRoomsAdapter(myView.context, layout, roomsList.toMutableList())
         else
-            CustomHomeDevicesAdapter(myView.context, layout, roomsList.toMutableList())
+            CustomHomeDevicesAdapter(myView.context, layout, deviceList.toMutableList())
 
         lst.adapter = adapter
 
-        if (layout != R.layout.custom_home_rooms_cardview) return
+        if (layout != R.layout.custom_home_rooms_cardview && layout !=
+            R.layout.custom_home_devices_cardview) return
 
-        lst.onItemClickListener = AdapterView.OnItemClickListener { _, _, _, _ ->
-            //val str = (adapterView.adapter as CustomHomeRoomsGridView).getItem(position)
+        lst.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+            val currentRoom = roomsList[position]
             val intent = Intent(this.activity, RoomActivity::class.java)
+            intent.putExtra("roomId", currentRoom.id.toString())
+            intent.putExtra("roomName", currentRoom.name)
+            intent.putExtra("token", token)
+            intent.putExtra("userId", userId)
             startActivity(intent)
         }
+    }
+
+    private fun isNetworkAvailable(): Boolean {
+        val connectivityManager =
+            myActivity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnected
     }
 }

@@ -29,4 +29,14 @@
     <string name="create_your_routine_schedule">Crie a suas rotinas</string>
     <string name="all_day">Todos dias</string>
     <string name="today">Hoje</string>
+    <string name="Delete">Eliminar Dispositivo</string>
+    <string name="Edit">Editar Dispositivo</string>
+    <string name="PinValue">Valor PIN\n</string>
+    <string name="deviceAdd_device_state">Inserir estado do dispositivo</string>
+    <string name="deviceAdd_device_pinvalue">Inserir PIN do dispositivo</string>
+    <string name="deviceAdd_device_value">Inserir valor do dispositivo</string>
+    <string name="Value">Valor</string>
+    <string name="addDevice">Adicionar divisão</string>
+    <string name="editRoom">Editar divisão</string>
+    <string name="deleteRoom">Eliminar divisão</string>
 </resources>

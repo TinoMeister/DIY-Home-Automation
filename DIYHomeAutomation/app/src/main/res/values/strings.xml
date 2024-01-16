@@ -42,4 +42,14 @@
     <string name="create_your_routine_schedule">Create your routine schedule</string>
     <string name="all_day">All day</string>
     <string name="today">Today</string>
+    <string name="Delete">Delete Device</string>
+    <string name="Edit">Edit Device</string>
+    <string name="PinValue">Pin Value\n</string>
+    <string name="deviceAdd_device_state">Enter device state</string>
+    <string name="deviceAdd_device_pinvalue">Enter device pin value</string>
+    <string name="deviceAdd_device_value">Enter device value</string>
+    <string name="Value">Value</string>
+    <string name="addDevice">Add device</string>
+    <string name="editRoom">Edit Room</string>
+    <string name="deleteRoom">Delete Room</string>
 </resources>
