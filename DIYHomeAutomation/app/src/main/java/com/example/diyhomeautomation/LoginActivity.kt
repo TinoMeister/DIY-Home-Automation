@@ -85,8 +85,8 @@ class LoginActivity : AppCompatActivity() {
 
         // Find the Login button and set a click listener
         btnLogin.setOnClickListener {
-            val email = "test@gmail.com"//email.editText!!.text.toString()
-            val password = "test1234" //password.editText!!.text.toString()
+            val email = "teste69@gmail.com"//email.editText!!.text.toString()
+            val password = "test69" //password.editText!!.text.toString()
 
             // launching a new coroutine
             GlobalScope.launch {

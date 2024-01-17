@@ -21,9 +21,6 @@
             android:name=".restrictions.RestrictionCUActivity"
             android:exported="false" />
         <activity
-            android:name=".restrictions.RestrictionsDevice1Activity"
-            android:exported="false"/>
-        <activity
             android:name=".schedules.ScheduleDeviceAddActivity"
             android:exported="false" />
         <activity
